@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Credit &amp; Contract Hybrid Shield — OnDevice First</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <h1>Credit &amp; Contract Hybrid Shield</h1>
+      <p class="lede">
+        <strong>OnDevice First.</strong> Paste a suspicious message, an email,
+        or a contract clause <em>before</em> you send money or sign. Personal
+        data is masked on this device and never leaves it; only a
+        de-identified skeleton may escalate to the cloud — and the shield
+        shows you exactly what was sent, and why. A last checkpoint before
+        money moves — and before a signature becomes binding.
+      </p>
+      <ul class="status-strip" aria-label="Engine status">
+        <li id="status-ondevice">On-device (Gemini Nano): checking…</li>
+        <li id="status-cloud">Cloud (Firebase AI Logic): checking…</li>
+        <li id="status-appcheck">App Check: checking…</li>
+      </ul>
+    </header>
+
+    <div class="layout">
+      <section class="panel" aria-label="Input">
+        <h2>1 · Text to check</h2>
+        <div class="scenario-row" role="group" aria-label="Load a demo scenario">
+          <button type="button" class="chip" data-scenario="A">Scenario A · Smishing</button>
+          <button type="button" class="chip" data-scenario="B">Scenario B · Contract</button>
+          <button type="button" class="chip" data-scenario="C">Scenario C · Fake billing</button>
+          <button type="button" class="chip" data-scenario="D">Scenario D · Too little context</button>
+        </div>
+        <form id="shield-form">
+          <label for="shield-input">Message, email, or contract text</label>
+          <textarea id="shield-input" rows="10" required
+            placeholder="Paste the text here. The original stays in this tab's memory only — it is never stored and never sent anywhere."></textarea>
+          <p class="hint"><span id="char-count">0</span> / <span id="char-max">20000</span> characters</p>
+          <button type="submit" id="analyze-btn">Check this text</button>
+        </form>
+
+        <h2>2 · What stays on this device</h2>
+        <p class="hint">Masked preview — placeholders replace personal data before anything else happens:</p>
+        <pre id="masked-preview" class="masked">(nothing yet)</pre>
+        <div id="token-chips" class="chips" aria-label="Masked item types"></div>
+      </section>
+
+      <section class="panel dashboard" aria-label="Hybrid dashboard">
+        <h2>Hybrid dashboard</h2>
+        <p class="route-line">
+          <span id="dash-route" class="badge badge-idle">IDLE</span>
+          <span id="dash-verdict" class="verdict">No analysis yet.</span>
+        </p>
+        <p id="dash-message" class="message"></p>
+
+        <h3>Escalation log</h3>
+        <p id="dash-escalation" class="log">No cloud call yet — everything so far ran on this device.</p>
+
+        <h3>Isolated on this device</h3>
+        <p id="dash-isolation" class="log">0 items masked.</p>
+
+        <h3>Evidence</h3>
+        <ul id="dash-evidence" class="evidence"></ul>
+
+        <h3>Cloud budget</h3>
+        <p id="dash-budget" class="log">0 / 20 calls this session.</p>
+
+        <h3>Stage timings (measured)</h3>
+        <p id="dash-timings" class="log">—</p>
+
+        <div id="dash-payload-wrap" hidden>
+          <h3>Exactly what was sent to the cloud</h3>
+          <pre id="dash-payload" class="payload"></pre>
+        </div>
+
+        <div id="dash-cloud-wrap" hidden>
+          <h3>Cloud analysis</h3>
+          <pre id="dash-cloud" class="answer"></pre>
+        </div>
+
+        <h3>What to do</h3>
+        <ul id="dash-guidance" class="guidance"></ul>
+
+        <h3>Local history (this device only)</h3>
+        <ul id="dash-history" class="history"></ul>
+        <button type="button" id="clear-history" class="chip danger">Delete all local history</button>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        Built for #BuildHybridAI 2026. Hybrid inference via Firebase AI Logic:
+        Gemini Nano on-device first, cloud Gemini by explained escalation,
+        honest abstention when the evidence is not enough. Local verdicts say
+        “matches risk patterns” or “no risk signals found” — this shield never
+        calls a text “safe”. Analysis history is stored only in this browser,
+        masked, and can be wiped above.
+      </p>
+    </footer>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
