@@ -1,0 +1,1 @@
+{"hosting":{"headers":[{"headers":[{"key":"Cache-Control","value":"public, max-age=300"}],"source":"**/*.js"}],"ignore":["firebase.json","**/.*","**/node_modules/**"],"public":"public","rewrites":[{"destination":"/index.html","source":"**"}],"site":"REPLACE_AT_GATE1"}}
