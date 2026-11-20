@@ -6,16 +6,16 @@
 // build step is required, which keeps the repository directly servable.
 // ---------------------------------------------------------------------------
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
 import {
   initializeAppCheck,
   ReCaptchaEnterpriseProvider,
-} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app-check.js";
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app-check.js";
 import {
   getAI,
   getGenerativeModel as sdkGetGenerativeModel,
   GoogleAIBackend,
-} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-ai.js";
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-ai.js";
 
 import { APPCHECK_SITE_KEY, FIREBASE_CONFIG } from "./config.js";
 
