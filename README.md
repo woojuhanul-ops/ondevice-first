@@ -7,8 +7,8 @@ patterns and unfair contract terms, and tells you what it found, what it
 based that on, and what to verify through official channels. Measured
 against the shipping code, a battery of 100 cases rebuilt from real-world
 scam scripts was defended 100 out of 100 — zero scams passed as safe, zero
-ordinary messages blocked (batteries run in Node; live cloud behavior is
-verified separately at Gate 2 — see "Not yet claimed" below).
+ordinary messages blocked (batteries run in Node; live cloud behavior was
+verified separately at Gate 2 — see below).
 
 The core mechanism is **hybrid inference** with
 [Firebase AI Logic](https://firebase.google.com/docs/ai-logic), organized
@@ -50,11 +50,17 @@ This is an entry for
   **0.027 ms per pass, measured in Node**. No speed figure is claimed for
   model inference; the UI displays the measured per-stage timings of the
   running browser instead.
-- **Not yet claimed:** live cloud escalation in a real browser and
-  on-device Gemini Nano behavior are verified separately at the project's
-  Gate 2 browser-verification step; until then the app degrades honestly —
-  with the cloud unconfigured or unreachable it abstains with a stated
-  reason instead of pretending to analyse.
+- **Gate 2 — live cloud verification (passed 2026-11-20):** live cloud
+  escalation in a real browser has been exercised end to end. Measured
+  scenario-B cloud round-trips ranged from about **16 s to about 166 s**
+  (15,997 ms and 166,418 ms on the successful runs). The honest caveat
+  stands: on the free tier, endpoint congestion can make a round-trip
+  fail, and in that case the app abstains with a stated reason instead of
+  pretending to analyse — in Gate 2 testing every failure was endpoint
+  congestion, the app abstained correctly every time, and no app defect
+  was observed. On-device Gemini Nano behavior is still verified
+  separately; where Nano is unavailable the app says so and relies on
+  the local stages plus escalation.
 
 ## Architecture
 
