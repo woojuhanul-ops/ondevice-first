@@ -25,7 +25,7 @@ export const FIREBASE_CONFIG = {
 // Leave empty until Gate 1; while empty, App Check initialisation is skipped
 // and the UI reports that state honestly. For contest judging, a debug token
 // may be used instead (see firebase-init.js).
-export const APPCHECK_SITE_KEY = "";
+export const APPCHECK_SITE_KEY = "6LcRHikuAAAAAIpFxIgILSkvANqtMDFMsmiyn3VP";
 
 // Cloud model used through Firebase AI Logic when inference escalates.
 export const CLOUD_MODEL = "gemini-2.5-flash";
