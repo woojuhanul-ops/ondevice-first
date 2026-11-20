@@ -22,7 +22,7 @@ import { INPUT_MAX_CHARS } from "./config.js";
 const $ = (id) => document.getElementById(id);
 const els = {
   onDevice: $("status-ondevice"),
-  cloud: $("status-cloud"),
+  statusCloud: $("status-cloud"),
   appCheck: $("status-appcheck"),
   form: $("shield-form"),
   input: $("shield-input"),
@@ -57,7 +57,7 @@ function renderStatus(status) {
   els.onDevice.textContent = status.onDevice.supported
     ? `On-device (Gemini Nano): ${status.onDevice.status}`
     : `On-device (Gemini Nano): unavailable — ${status.onDevice.detail}`;
-  els.cloud.textContent = status.cloud.configured
+  els.statusCloud.textContent = status.cloud.configured
     ? `Cloud (Firebase AI Logic): configured · budget ${status.cloud.budget} · calls used ${status.cloud.callsUsed}`
     : "Cloud (Firebase AI Logic): not configured in this build (project values pending) — local tiers fully active";
   els.appCheck.textContent = `App Check: ${status.appCheck}`;
