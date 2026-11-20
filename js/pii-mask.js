@@ -136,12 +136,25 @@ const DETECTORS = [
   {
     type: "ADDRESS",
     find(text, push, pushCandidate) {
-      // Canadian postal code: masked on sight (it is gone from the text
-      // either way, so it never blocks escalation) and listed as an
-      // address candidate for the Nano typing step.
-      const re = /\b[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d\b/g;
+      // Full-span rule (2026-11-20, Gate 2 live finding): masking only the
+      // postal code left the street and city portion of an address in
+      // plaintext in the cloud payload. When a postal code (CA) or ZIP
+      // (US) anchors the tail of an address, mask the whole span — street
+      // number + street name/type, city, province/state, code — as one
+      // ADDRESS token. A bare code with no recognized street span keeps
+      // the original on-sight masking as fallback.
+      const spanRe =
+        /\b\d{1,6}\s+(?:[A-Za-z][A-Za-z'.-]*\s+){0,4}(?:Street|St|Avenue|Ave|Road|Rd|Drive|Dr|Boulevard|Blvd|Lane|Ln|Court|Ct|Crescent|Cres|Place|Pl|Terrace|Ter|Way|Trail|Parkway|Pkwy|Highway|Hwy|Circle|Cir|Square|Sq)\b(?:\s+(?:North|South|East|West|NE|NW|SE|SW))?[,\s]+[A-Za-z][A-Za-z'.-]*(?:\s+[A-Za-z][A-Za-z'.-]*){0,2}[,\s]+(?:AB|BC|MB|NB|NL|NS|NT|NU|ON|PE|QC|SK|YT|AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)[,\s]+(?:[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d|\d{5}(?:-\d{4})?)\b/g;
+      const covered = [];
       let m;
+      while ((m = spanRe.exec(text)) !== null) {
+        push(m.index, m.index + m[0].length, "ADDRESS", m[0]);
+        pushCandidate("addresses", m[0], "address-span", true);
+        covered.push([m.index, m.index + m[0].length]);
+      }
+      const re = /\b[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d\b/g;
       while ((m = re.exec(text)) !== null) {
+        if (covered.some(([a, b]) => m.index >= a && m.index < b)) continue;
         push(m.index, m.index + m[0].length, "ADDRESS", m[0]);
         pushCandidate("addresses", m[0], "postal-code", true);
       }

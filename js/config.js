@@ -28,7 +28,7 @@ export const FIREBASE_CONFIG = {
 export const APPCHECK_SITE_KEY = "6LcRHikuAAAAAIpFxIgILSkvANqtMDFMsmiyn3VP";
 
 // Cloud model used through Firebase AI Logic when inference escalates.
-export const CLOUD_MODEL = "gemini-2.5-flash";
+export const CLOUD_MODEL = "gemini-3.8-flash";
 
 // Session budget for cloud calls. Frozen at Gate 1 (commander-approved,
 // 2026-11-19): 20 calls per session. cloud.js enforces this number in
