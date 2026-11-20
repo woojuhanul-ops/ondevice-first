@@ -38,7 +38,7 @@ This is an entry for
 
 ## What is measured, and where
 
-- The local pattern ledger ships with **53 patterns** (fraud scripts for
+- The local pattern ledger ships with **64 patterns** (fraud scripts for
   KR / CA / US / common patterns, unfair contract clauses, and
   medical/insurance impersonation), each described by the four "bones"
   shared by these scams: authority impersonation, urgency, secrecy, and

@@ -1,2220 +1,2991 @@
 {
-  "version": 1,
-  "note": "Local pattern ledger for the Credit & Contract Hybrid Shield. Every entry describes a publicly known fraud or contract-risk pattern; all example phrases are fictional, written for this ledger. No real incident text, no real personal data.",
-  "patterns": [
+ "version": 1,
+ "note": "Local pattern ledger for the Credit & Contract Hybrid Shield. Every entry describes a publicly known fraud or contract-risk pattern; all example phrases are fictional, written for this ledger. No real incident text, no real personal data.",
+ "patterns": [
+  {
+   "id": "FRAUD-KR-PROS-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "prosecution",
+    "label": "Prosecutor impersonation (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
     {
-      "id": "FRAUD-KR-PROS-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "prosecution",
-        "label": "Prosecutor impersonation (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "SECRECY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "자금세탁",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "계좌가 동결",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "누구에게도 말하지 마",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "안전계좌",
-          "weight": 3
-        },
-        {
-          "kind": "structure",
-          "value": "link+account",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "Prosecutors never move citizens' money to a 'safe account' and never conduct investigations by text message. End contact and call the prosecution office or police on their published number to verify.",
-      "verifyChannel": "Police 112 or the Financial Supervisory Service 1332 (KR)."
+     "kind": "phrase",
+     "value": "자금세탁",
+     "weight": 2
     },
     {
-      "id": "FRAUD-KR-BANK-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "bank",
-        "label": "Bank security-centre impersonation (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "보안카드",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "인증번호를 알려",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "계좌가 정지",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Banks never ask for security-card digits or one-time codes by message. Do not open the link; call the number printed on your bank card instead.",
-      "verifyChannel": "The official number on your bank card or the bank's published app."
+     "kind": "phrase",
+     "value": "계좌가 동결",
+     "weight": 3
     },
     {
-      "id": "FRAUD-KR-TAX-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "tax",
-        "label": "Tax refund impersonation (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "세금 환급",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "환급금 조회",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "신청 기간이 오늘",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Tax refunds are never claimed through a link in a text message. Check Hometax directly by typing its address yourself.",
-      "verifyChannel": "Hometax (hometax.go.kr) or National Tax Service 126 (KR)."
+     "kind": "phrase",
+     "value": "누구에게도 말하지 마",
+     "weight": 3
     },
     {
-      "id": "FRAUD-KR-POLICE-001",
-      "type": "voice-lure",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "police",
-        "label": "Police summons impersonation (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "SECRECY"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "출석 요구",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "명의가 도용",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "수사 중이라",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Police do not demand attendance or secrecy through messengers, and a stolen-identity claim is a classic opening line. Hang up and call the station's published number.",
-      "verifyChannel": "Police 112 (KR)."
+     "kind": "phrase",
+     "value": "안전계좌",
+     "weight": 3
     },
     {
-      "id": "FRAUD-KR-FAMILY-001",
-      "type": "voice-lure",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "family",
-        "label": "Family member impersonation via messenger (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "휴대폰이 고장",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "급하게 송금",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "이 번호로만 연락",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "폰 액정이 깨져",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "상품권 좀 사",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "번호 바꿨어요",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "보증금을 내야",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "A broken-phone story plus a new number is the standard setup. Call the family member's original number or ask a question only they can answer before sending anything.",
-      "verifyChannel": "The family member's previously saved phone number."
-    },
-    {
-      "id": "FRAUD-KR-DELIVERY-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Parcel delivery impersonation (KR)"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "배송 주소 오류",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "주소를 확인하세요",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "반송 예정",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "재배송 신청",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "배송지를 입력",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "통관 수수료",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "세관에 유치",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Couriers do not collect address fixes or payments through text links. Track the parcel inside the courier's official app instead.",
-      "verifyChannel": "The courier company's official app or website, typed by hand."
-    },
-    {
-      "id": "FRAUD-KR-INVEST-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Guaranteed-return investment lure (KR)"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "원금 보장",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "수익률 보장",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "리딩방",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "코인 상장",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "비공개 물량",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "담당자 계좌로 송금",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "정보방",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "상한가 종목",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "카드 등록만",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "부수입 확정",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "세미나 초청",
-          "weight": 1
-        }
-      ],
-      "severity": "high",
-      "guidance": "No legitimate investment guarantees principal and returns together. Treat any guaranteed-return pitch as fraud until a licensed institution confirms it in writing.",
-      "verifyChannel": "Financial Supervisory Service 1332 (KR) for licence checks."
-    },
-    {
-      "id": "FRAUD-KR-LOAN-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "bank",
-        "label": "Loan approval fee scam (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "대출 승인",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "보증료를 먼저",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "저금리로 갈아",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "A lender who demands an upfront guarantee fee before disbursing a loan is running a fee scam. Real loan costs are deducted or billed formally, never wired to a personal account first.",
-      "verifyChannel": "The lender's official branch or published phone number."
-    },
-    {
-      "id": "FRAUD-KR-CARD-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "bank",
-        "label": "Card company impersonation (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "카드 부정 사용",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "본인 확인을 위해",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Card issuers do not verify identity through text-message links. Open the issuer's app or call the number on the back of the card.",
-      "verifyChannel": "The number printed on the back of your card."
-    },
-    {
-      "id": "FRAUD-KR-GOV-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "tax",
-        "label": "Government subsidy impersonation (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "지원금 신청",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "대상자로 선정",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "오늘까지 신청",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Subsidy selection notices do not arrive as text links with same-day deadlines. Check the government portal by typing its address yourself.",
-      "verifyChannel": "Government24 (gov.kr) or the issuing ministry's published number."
-    },
-    {
-      "id": "FRAUD-KR-JOB-001",
-      "type": "smishing",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Account-rental job scam (KR)"
-      },
-      "bones": [
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "고수익 알바",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "계좌를 빌려",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "통장 대여",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "대신 결제",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "본인 카드로 먼저 결제",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "휴대폰 개통",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "유심은 저희가 회수",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Lending your bank account is a crime in itself and makes you the visible account holder for fraud proceeds. No legitimate job rents personal accounts.",
-      "verifyChannel": "Police 112 or Financial Supervisory Service 1332 (KR)."
-    },
-    {
-      "id": "FRAUD-KR-VOICE-001",
-      "type": "voice-lure",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "family",
-        "label": "Staged family emergency call (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "SECRECY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "합의금이 필요",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "지금 말하면 안 돼",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "병원비부터",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "A staged emergency with a settlement demand is designed to stop you thinking. Hang up and reach the family member and the hospital through numbers you already trust.",
-      "verifyChannel": "The family member's saved number; police 112 (KR)."
-    },
-    {
-      "id": "FRAUD-CA-TAX-001",
-      "type": "smishing",
-      "locale": "CA",
-      "impersonation": {
-        "institutionType": "tax",
-        "label": "Canada Revenue Agency impersonation"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "Canada Revenue Agency",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "arrest warrant",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "gift cards",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "The CRA never demands payment by gift card, prepaid card, or crypto, and never threatens arrest by text. Sign in to CRA My Account or call the published CRA number.",
-      "verifyChannel": "CRA official lines (1-800-959-8281 for individuals, CA)."
-    },
-    {
-      "id": "FRAUD-US-TAX-001",
-      "type": "smishing",
-      "locale": "US",
-      "impersonation": {
-        "institutionType": "tax",
-        "label": "IRS impersonation"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "Internal Revenue Service",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "lawsuit against you",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "pay immediately or",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "The IRS initiates contact by postal mail, not by text with an instant payment demand. Verify through irs.gov or the number on an official notice.",
-      "verifyChannel": "IRS official site (irs.gov) or 1-800-829-1040 (US)."
-    },
-    {
-      "id": "FRAUD-COMMON-BANK-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "bank",
-        "label": "Bank account-locked lure"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "your account has been locked",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "verify your password",
-          "weight": 3
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "confirm your PIN",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "re-enter your card number",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "6-digit code we just sent",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "account will be closed",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "incomplete verification",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "one-time passcode",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "read it to me",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "A locked-account text with a verification link is a credential harvest. Open your banking app directly; never sign in from a message link.",
-      "verifyChannel": "Your bank's official app or the number on your card."
-    },
-    {
-      "id": "FRAUD-COMMON-GRAND-001",
-      "type": "voice-lure",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "family",
-        "label": "Grandparent emergency scam"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "SECRECY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "it's me, your grandson",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "don't tell Mom",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "bail money",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "Secrecy plus bail money is the signature of this scam. Call your grandchild and their parents on saved numbers before doing anything else.",
-      "verifyChannel": "Family members' saved phone numbers; local police non-emergency line."
-    },
-    {
-      "id": "FRAUD-COMMON-TECH-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Tech support impersonation"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "your computer has a virus",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "Microsoft support",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "remote access",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "apple id was signed in",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "your account will be disabled",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "windows licence has expired",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "payment by gift card",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "악성코드가 탐지",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "원격 지원을 위해",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "프로그램을 설치하세요",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "antivirus subscription renewed",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "open the refund page",
-          "weight": 3
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Microsoft and Apple never detect viruses on your machine or ask for remote access by message. Close the page or hang up; run your own installed security software.",
-      "verifyChannel": "The vendor's official support site, typed by hand."
-    },
-    {
-      "id": "FRAUD-COMMON-PRIZE-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Prize with claim fee"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "you have won",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "claim fee",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "expires in 24 hours",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "A prize that costs money to claim is not a prize. Legitimate winnings never require an advance fee from the winner.",
-      "verifyChannel": "The promoter's official website, typed by hand."
-    },
-    {
-      "id": "FRAUD-COMMON-RENT-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Rental deposit wire scam"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "wire the deposit",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "other renters are waiting",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "cannot show the unit",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "viewing is possible after payment",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "pay the first month by e-transfer",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "holding fee by gift card",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "계약금부터 입금",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "집주인이 해외",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "사진만 보고 계약",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "오늘 입금하면",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "A landlord who cannot show the unit but demands a wired deposit is a known listing-clone pattern. View the property and verify ownership before any payment.",
-      "verifyChannel": "Land title office or the platform's official support."
-    },
-    {
-      "id": "FRAUD-COMMON-CRYPTO-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Crypto doubling scam"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "double your bitcoin",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "send first to verify your wallet",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "No giveaway doubles crypto; the verification transfer is simply stolen. Treat every send-first scheme as theft.",
-      "verifyChannel": "Your exchange's official app; the promoter's verified channels only."
-    },
-    {
-      "id": "FRAUD-COMMON-HR-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Payroll diversion lure"
-      },
-      "bones": [
-        "AUTHORITY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "update your direct deposit",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "before payroll closes",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Payroll changes are never collected through a message link. Use your employer's HR system the way you normally reach it, and confirm with HR by phone.",
-      "verifyChannel": "Your employer's HR department on its internal number."
-    },
-    {
-      "id": "FRAUD-COMMON-UTIL-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Utility shutoff threat"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "power will be disconnected",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "within 30 minutes",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "pay now to avoid",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Utilities follow formal notice periods and never collect instant payment by text link. Check your account in the utility's own app.",
-      "verifyChannel": "The utility's published customer number."
-    },
-    {
-      "id": "FRAUD-COMMON-IMMIG-001",
-      "type": "voice-lure",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "police",
-        "label": "Immigration enforcement impersonation"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "SECRECY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "deportation",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "pay the bond",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "do not contact a lawyer",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "Immigration authorities do not collect bonds by phone or forbid lawyers. 'Do not contact a lawyer' is itself the loudest alarm in this script.",
-      "verifyChannel": "An immigration lawyer or legal aid line of your own choosing."
-    },
-    {
-      "id": "FRAUD-COMMON-MULE-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Money mule recruitment"
-      },
-      "bones": [
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "receive payments and forward",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "keep a commission",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "work from home, no experience",
-          "weight": 1
-        }
-      ],
-      "severity": "high",
-      "guidance": "Forwarding other people's money for a commission is money laundering, and the account holder carries the legal risk. Decline and report the recruiter.",
-      "verifyChannel": "Your bank's fraud line or local police non-emergency line."
-    },
-    {
-      "id": "FRAUD-COMMON-TRANSFER-001",
-      "type": "voice-lure",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Vague transfer request (insufficient context)"
-      },
-      "bones": [
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "송금 부탁",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "send the money first",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "explain later",
-          "weight": 1
-        }
-      ],
-      "severity": "medium",
-      "guidance": "A transfer request with no named sender, institution, or reason cannot be verified from the text alone. Do not act on it until the requester confirms through a channel you already trust.",
-      "verifyChannel": "The requester, reached on a number or channel you already had."
-    },
-    {
-      "id": "CLAUSE-PENALTY-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Excessive late penalty with acceleration"
-      },
-      "clauseRisk": [
-        "excessive-penalty",
-        "acceleration"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "penalty of",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "accrues daily",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "entire balance becomes due",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "liquidated damages",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "accelerate",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "become payable immediately",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Ask before signing: Is the penalty capped? Does a short delay really make the full balance due at once? Get the total worst-case cost in writing.",
-      "verifyChannel": "A consumer lawyer or your provincial/state consumer protection office."
-    },
-    {
-      "id": "CLAUSE-GUARANTOR-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Blanket joint-and-several guarantee"
-      },
-      "clauseRisk": [
-        "joint-guarantee",
-        "future-debt-blanket"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "joint and several liability",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "all present and future debts",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Ask before signing: Does the guarantee cover future debts you have not seen? Is there a fixed ceiling and an end date? A blanket guarantee can outlive the loan it was signed for.",
-      "verifyChannel": "Independent legal advice — guarantors are entitled to it before signing."
-    },
-    {
-      "id": "CLAUSE-RENEWAL-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Auto-renewal with unilateral amendment"
-      },
-      "clauseRisk": [
-        "auto-renewal-trap",
-        "unilateral-amendment"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "renews automatically",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "unless cancelled in writing",
-          "weight": 1
-        },
-        {
-          "kind": "phrase",
-          "value": "may amend any term",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Ask before signing: How long is each renewal, what is the exact cancellation deadline, and can the other side change terms you already agreed to?",
-      "verifyChannel": "Consumer protection office; calendar the cancellation deadline before signing."
-    },
-    {
-      "id": "CLAUSE-ARBITRATION-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Court-rights waiver"
-      },
-      "clauseRisk": [
-        "court-rights-waiver"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "waive your right to a jury trial",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "binding arbitration",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "class action waiver",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Ask before signing: Which disputes are forced into arbitration, where would it be held, and who pays the arbitrator's fees if you lose?",
-      "verifyChannel": "A consumer lawyer for contracts above a small amount."
-    },
-    {
-      "id": "CLAUSE-CONFESSION-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Confession of judgment"
-      },
-      "clauseRisk": [
-        "judgment-without-trial"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "confession of judgment",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "judgment without notice",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "This clause lets the other side obtain a court judgment without suing you first. It is banned for consumers in many jurisdictions — treat its presence as a stop sign.",
-      "verifyChannel": "A lawyer before signing; do not sign the same day."
-    },
-    {
-      "id": "CLAUSE-PERSONAL-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Personal guarantee inside a business contract"
-      },
-      "clauseRisk": [
-        "personal-guarantee"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "personally guarantee",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "personal assets",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Ask before signing: Are you signing as the company or as yourself? A personal guarantee puts your house and savings behind a business debt.",
-      "verifyChannel": "Independent legal advice for the individual guarantor."
-    },
-    {
-      "id": "CLAUSE-DEBIT-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Unlimited direct-debit authority"
-      },
-      "clauseRisk": [
-        "unlimited-debit-authority"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "withdraw any amount",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "any account you hold",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Ask before signing: Which single account, what maximum amount, and how do you revoke the authority? Open-ended debit rights are not a normal billing term.",
-      "verifyChannel": "Your bank — ask how a pre-authorized debit can be stopped."
-    },
-    {
-      "id": "CLAUSE-INDEMNITY-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "One-sided indemnity"
-      },
-      "clauseRisk": [
-        "one-sided-indemnity"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "indemnify and hold harmless",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "any and all claims arising",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Ask before signing: Does the indemnity cover the other side's own mistakes? Is there a cap tied to the contract value?",
-      "verifyChannel": "A contract lawyer for business agreements."
-    },
-    {
-      "id": "CLAUSE-TERMINATION-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "One-sided termination"
-      },
-      "clauseRisk": [
-        "one-sided-termination"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "terminate at any time without cause",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "you may not terminate",
-          "weight": 3
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Ask before signing: Can both sides exit on the same terms? If only they can leave, what compensation applies when they do?",
-      "verifyChannel": "Consumer protection office or a contract lawyer."
-    },
-    {
-      "id": "CLAUSE-EXCLUSIVITY-001",
-      "type": "contract-clause",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Broad exclusivity / non-compete"
-      },
-      "clauseRisk": [
-        "exclusivity-lock-in"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "shall not provide services to any third party",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "exclusive services",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Ask before signing: How long does the exclusivity last, what work exactly does it cover, and does it survive the end of the contract?",
-      "verifyChannel": "An employment or contract lawyer before signing."
-    },
-    {
-      "id": "SCAM-CA-MED-001",
-      "type": "insurance-scam",
-      "locale": "CA",
-      "impersonation": {
-        "institutionType": "insurer",
-        "label": "Provincial health billing impersonation (CA)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "SECRECY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "must be settled today",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "avoid collections",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "Do not discuss this with family",
-          "weight": 3
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Provincial health plans do not collect emergency balances through text links or demand secrecy from family. Call the number on your health card or the hospital's billing office directly.",
-      "verifyChannel": "Your provincial health ministry line or the hospital billing office."
-    },
-    {
-      "id": "SCAM-US-MED-001",
-      "type": "insurance-scam",
-      "locale": "US",
-      "impersonation": {
-        "institutionType": "insurer",
-        "label": "Medicare card replacement scam (US)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "your Medicare number",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "new plastic card",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "confirm to keep your coverage",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Medicare never calls to issue replacement cards or asks for your Medicare number to keep coverage active. Guard the number like a bank password.",
-      "verifyChannel": "Medicare at 1-800-633-4227 (US)."
-    },
-    {
-      "id": "SCAM-COMMON-INS-001",
-      "type": "insurance-scam",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "insurer",
-        "label": "Insurance premium refund lure"
-      },
-      "bones": [
-        "AUTHORITY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "premium refund",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "confirm your policy number",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Insurers refund through the payment method already on file; they do not collect policy numbers through message links. Open your insurer's app instead.",
-      "verifyChannel": "Your insurer's published claims line."
-    },
-    {
-      "id": "SCAM-COMMON-INS-002",
-      "type": "insurance-scam",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "insurer",
-        "label": "Fake claim settlement fee"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "settlement cheque",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "pay the processing fee first",
-          "weight": 3
-        }
-      ],
-      "severity": "high",
-      "guidance": "A settlement that requires you to pay a fee first is an advance-fee scam wearing an insurance costume. Real claim payments never move in that order.",
-      "verifyChannel": "Your insurer's published claims line; your claim number from official mail."
-    },
-    {
-      "id": "SCAM-KR-MED-001",
-      "type": "insurance-scam",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "insurer",
-        "label": "National health insurance refund impersonation (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "건강보험 환급금",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "본인 계좌로 신청",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Health insurance refunds are applied for inside the official NHIS channels, never through a text link asking for your account. Type the NHIS address yourself.",
-      "verifyChannel": "National Health Insurance Service 1577-1000 (KR)."
-    },
-    {
-      "id": "SCAM-COMMON-MED-001",
-      "type": "insurance-scam",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "insurer",
-        "label": "Pharmacy payment confirmation lure"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "your prescription is ready",
-          "weight": 1
-        },
-        {
-          "kind": "phrase",
-          "value": "confirm payment details",
-          "weight": 3
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "your medication is ready",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "verify your insurance",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Pharmacies do not collect payment details through message links for a ready prescription. Call the pharmacy on the number from your prescription label.",
-      "verifyChannel": "Your pharmacy's number from the prescription label."
-    },
-    {
-      "id": "FRAUD-COMMON-DELIVERY-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Courier delivery / customs fee lure (EN)"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "could not be delivered",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "redelivery fee",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "delivery confirmation fee",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "customs duty payment",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "held at the depot",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Couriers and customs do not collect small release or redelivery fees through text links. Track the parcel or contact customs through the official site you type yourself.",
-      "verifyChannel": "The courier's official app or website, typed by hand."
-    },
-    {
-      "id": "FRAUD-CA-INTERAC-001",
-      "type": "smishing",
-      "locale": "CA",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Interac e-Transfer deposit lure"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "Interac e-Transfer",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "auto-deposit failed",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "deposit your money",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Interac never sends deposit links by text; e-Transfers land in your bank account or your bank's own app. Open your banking app directly and check there.",
-      "verifyChannel": "Your bank's official app or the number on your card."
-    },
-    {
-      "id": "FRAUD-CA-SIN-001",
-      "type": "smishing",
-      "locale": "CA",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Service Canada SIN suspension scam"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "SECRECY"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "SIN has been suspended",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "your benefits will stop",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "speak with an officer",
-          "weight": 1
-        }
-      ],
-      "severity": "high",
-      "guidance": "Service Canada does not suspend a SIN by phone or text, and benefits are never stopped for refusing a call. Hang up and call Service Canada on its published number.",
-      "verifyChannel": "Service Canada official lines (1-800-622-6232, CA)."
-    },
-    {
-      "id": "FRAUD-COMMON-FINE-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Fine / toll / ticket payment lure"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "missed jury duty",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "bench warrant",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "parking ticket",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "photo radar ticket",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "unpaid toll",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "407 ETR",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "scan the qr code",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "boot fee",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "과태료",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "가산금",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Fines and tolls are not collected through text-message links or QR codes in notices, and courts never sell warrant avoidance by phone. Check the issuing authority's official site, typed by hand.",
-      "verifyChannel": "The court's, city's, or toll operator's official website, typed by hand."
-    },
-    {
-      "id": "FRAUD-COMMON-TELCO-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Telco billing / suspension lure"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "avoid suspension",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "update your payment method",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "요금 미납",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "이용이 정지",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "you did not request",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Carriers do not collect billing fixes or plan-change cancellations through text links. Open the carrier's own app or call the number on your bill.",
-      "verifyChannel": "Your carrier's official app or the number on your bill."
-    },
-    {
-      "id": "FRAUD-COMMON-FAMILY-001",
-      "type": "voice-lure",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Family member new-number impersonation (EN)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "this is my new number",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "don't call my old number",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "I changed my number",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "stuck at the airport",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "pay you back tonight",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "lost my wallet and phone",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "wired for a flight home",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "A new number plus a story that blocks calling the old number is the standard setup. Call the family member's saved number, or ask a question only they can answer, before sending anything.",
-      "verifyChannel": "The family member's previously saved phone number."
-    },
-    {
-      "id": "FRAUD-KR-FSS-001",
-      "type": "voice-lure",
-      "locale": "KR",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Financial Supervisory Service loan-cancel script (KR)"
-      },
-      "bones": [
-        "AUTHORITY",
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "금융감독원",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "기존 대출을 상환",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "상환금을 보내",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "The Financial Supervisory Service never orders a loan repayment to a designated account to block a new loan. Hang up and verify through the FSS 1332 line or your lender directly.",
-      "verifyChannel": "Financial Supervisory Service 1332 (KR) or your lender's published number."
-    },
-    {
-      "id": "FRAUD-COMMON-INVEST-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Guaranteed-return investment lure (EN)"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "guaranteed minimum",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "principal protected",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "guaranteed by the treasury",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "guaranteed returns",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "wire funds today",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "my uncle's analyst",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "withdraw a small profit first",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "unauthorized withdrawal",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "move your coins",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "secure wallet we provide",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "recovery firm",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "tracing fee",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "return your coins",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Guaranteed returns, rescue wallets, and pay-a-fee-to-recover schemes are three costumes for the same theft. No licensed institution guarantees returns or moves your assets to a wallet it provides by message.",
-      "verifyChannel": "Your provincial securities regulator or the exchange's official app."
-    },
-    {
-      "id": "FRAUD-COMMON-ROMANCE-001",
-      "type": "voice-lure",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Romance scam money request"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "replacement officer fee",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "I will repay you double",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "stuck at customs",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "release fees",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "send a gift card",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "해외 파병",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "휴가 신청 비용",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "storage company",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "half the gold is yours",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "needs surgery tomorrow",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "won't start without a deposit",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Fees to release leave, goods, inheritances, or hospital care are the romance scam's collection step; the emergency is scripted and the debt is never repaid. Never send money to someone you have not met in person.",
-      "verifyChannel": "A trusted family member or your local police non-emergency line."
-    },
-    {
-      "id": "FRAUD-COMMON-TASKJOB-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Task job / fake-cheque job scam"
-      },
-      "bones": [
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "top up your work account",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "unlock higher-paying tasks",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "task job",
-          "weight": 1
-        },
-        {
-          "kind": "phrase",
-          "value": "cheque we mailed you",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "buy the required software",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "hand the login",
-          "weight": 3
-        },
-        {
-          "kind": "phrase",
-          "value": "signup bonus",
-          "weight": 2
-        }
-      ],
-      "severity": "high",
-      "guidance": "Jobs that require topping up an account, buying software with a mailed cheque, or handing over an account login are fee and laundering scams. A real employer never charges you to start work.",
-      "verifyChannel": "Your bank's fraud line (for the cheque) or local police non-emergency line."
-    },
-    {
-      "id": "FRAUD-COMMON-STREAM-001",
-      "type": "smishing",
-      "locale": "COMMON",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Streaming / account-on-hold billing lure"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "payment was declined",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "account is on hold",
-          "weight": 2
-        },
-        {
-          "kind": "phrase",
-          "value": "update your payment method",
-          "weight": 2
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Streaming and subscription services do not collect payment fixes through text links. Open the service's own app or type its address yourself to check the account.",
-      "verifyChannel": "The service's official app or website, typed by hand."
-    },
-    {
-      "id": "FRAUD-COMMON-TRAVEL-001",
-      "type": "smishing",
-      "locale": "CA",
-      "impersonation": {
-        "institutionType": "none",
-        "label": "Flight cancellation compensation fee lure"
-      },
-      "bones": [
-        "URGENCY",
-        "PAYMENT"
-      ],
-      "signals": [
-        {
-          "kind": "phrase",
-          "value": "flight was cancelled",
-          "weight": 1
-        },
-        {
-          "kind": "phrase",
-          "value": "verification payment",
-          "weight": 3
-        },
-        {
-          "kind": "structure",
-          "value": "link",
-          "weight": 2
-        }
-      ],
-      "severity": "medium",
-      "guidance": "Airlines never charge a verification payment to process compensation or a rebooking. Rebook inside the airline's own app or on its official site.",
-      "verifyChannel": "The airline's official app or website, typed by hand."
+     "kind": "structure",
+     "value": "link+account",
+     "weight": 3
     }
-  ]
+   ],
+   "severity": "high",
+   "guidance": "Prosecutors never move citizens' money to a 'safe account' and never conduct investigations by text message. End contact and call the prosecution office or police on their published number to verify.",
+   "verifyChannel": "Police 112 or the Financial Supervisory Service 1332 (KR)."
+  },
+  {
+   "id": "FRAUD-KR-BANK-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "bank",
+    "label": "Bank security-centre impersonation (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "보안카드",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "인증번호를 알려",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "계좌가 정지",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Banks never ask for security-card digits or one-time codes by message. Do not open the link; call the number printed on your bank card instead.",
+   "verifyChannel": "The official number on your bank card or the bank's published app."
+  },
+  {
+   "id": "FRAUD-KR-TAX-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "tax",
+    "label": "Tax refund impersonation (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "세금 환급",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "환급금 조회",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "신청 기간이 오늘",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Tax refunds are never claimed through a link in a text message. Check Hometax directly by typing its address yourself.",
+   "verifyChannel": "Hometax (hometax.go.kr) or National Tax Service 126 (KR)."
+  },
+  {
+   "id": "FRAUD-KR-POLICE-001",
+   "type": "voice-lure",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "police",
+    "label": "Police summons impersonation (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "출석 요구",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "명의가 도용",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "수사 중이라",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Police do not demand attendance or secrecy through messengers, and a stolen-identity claim is a classic opening line. Hang up and call the station's published number.",
+   "verifyChannel": "Police 112 (KR)."
+  },
+  {
+   "id": "FRAUD-KR-FAMILY-001",
+   "type": "voice-lure",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "family",
+    "label": "Family member impersonation via messenger (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "휴대폰이 고장",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "급하게 송금",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "이 번호로만 연락",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "폰 액정이 깨져",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "상품권 좀 사",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "번호 바꿨어요",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "보증금을 내야",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "A broken-phone story plus a new number is the standard setup. Call the family member's original number or ask a question only they can answer before sending anything.",
+   "verifyChannel": "The family member's previously saved phone number."
+  },
+  {
+   "id": "FRAUD-KR-DELIVERY-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Parcel delivery impersonation (KR)"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "배송 주소 오류",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "주소를 확인하세요",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "반송 예정",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "재배송 신청",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "배송지를 입력",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "통관 수수료",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "세관에 유치",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Couriers do not collect address fixes or payments through text links. Track the parcel inside the courier's official app instead.",
+   "verifyChannel": "The courier company's official app or website, typed by hand."
+  },
+  {
+   "id": "FRAUD-KR-INVEST-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Guaranteed-return investment lure (KR)"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "원금 보장",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "수익률 보장",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "리딩방",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "코인 상장",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "비공개 물량",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "담당자 계좌로 송금",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "정보방",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "상한가 종목",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "카드 등록만",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "부수입 확정",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "세미나 초청",
+     "weight": 1
+    }
+   ],
+   "severity": "high",
+   "guidance": "No legitimate investment guarantees principal and returns together. Treat any guaranteed-return pitch as fraud until a licensed institution confirms it in writing.",
+   "verifyChannel": "Financial Supervisory Service 1332 (KR) for licence checks."
+  },
+  {
+   "id": "FRAUD-KR-LOAN-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "bank",
+    "label": "Loan approval fee scam (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "대출 승인",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "보증료를 먼저",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "저금리로 갈아",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "A lender who demands an upfront guarantee fee before disbursing a loan is running a fee scam. Real loan costs are deducted or billed formally, never wired to a personal account first.",
+   "verifyChannel": "The lender's official branch or published phone number."
+  },
+  {
+   "id": "FRAUD-KR-CARD-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "bank",
+    "label": "Card company impersonation (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "카드 부정 사용",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "본인 확인을 위해",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Card issuers do not verify identity through text-message links. Open the issuer's app or call the number on the back of the card.",
+   "verifyChannel": "The number printed on the back of your card."
+  },
+  {
+   "id": "FRAUD-KR-GOV-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "tax",
+    "label": "Government subsidy impersonation (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "지원금 신청",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "대상자로 선정",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "오늘까지 신청",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Subsidy selection notices do not arrive as text links with same-day deadlines. Check the government portal by typing its address yourself.",
+   "verifyChannel": "Government24 (gov.kr) or the issuing ministry's published number."
+  },
+  {
+   "id": "FRAUD-KR-JOB-001",
+   "type": "smishing",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Account-rental job scam (KR)"
+   },
+   "bones": [
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "고수익 알바",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "계좌를 빌려",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "통장 대여",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "대신 결제",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "본인 카드로 먼저 결제",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "휴대폰 개통",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "유심은 저희가 회수",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Lending your bank account is a crime in itself and makes you the visible account holder for fraud proceeds. No legitimate job rents personal accounts.",
+   "verifyChannel": "Police 112 or Financial Supervisory Service 1332 (KR)."
+  },
+  {
+   "id": "FRAUD-KR-VOICE-001",
+   "type": "voice-lure",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "family",
+    "label": "Staged family emergency call (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "합의금이 필요",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "지금 말하면 안 돼",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "병원비부터",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "A staged emergency with a settlement demand is designed to stop you thinking. Hang up and reach the family member and the hospital through numbers you already trust.",
+   "verifyChannel": "The family member's saved number; police 112 (KR)."
+  },
+  {
+   "id": "FRAUD-CA-TAX-001",
+   "type": "smishing",
+   "locale": "CA",
+   "impersonation": {
+    "institutionType": "tax",
+    "label": "Canada Revenue Agency impersonation"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "Canada Revenue Agency",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "arrest warrant",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "gift cards",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "The CRA never demands payment by gift card, prepaid card, or crypto, and never threatens arrest by text. Sign in to CRA My Account or call the published CRA number.",
+   "verifyChannel": "CRA official lines (1-800-959-8281 for individuals, CA)."
+  },
+  {
+   "id": "FRAUD-US-TAX-001",
+   "type": "smishing",
+   "locale": "US",
+   "impersonation": {
+    "institutionType": "tax",
+    "label": "IRS impersonation"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "Internal Revenue Service",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "lawsuit against you",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "pay immediately or",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "The IRS initiates contact by postal mail, not by text with an instant payment demand. Verify through irs.gov or the number on an official notice.",
+   "verifyChannel": "IRS official site (irs.gov) or 1-800-829-1040 (US)."
+  },
+  {
+   "id": "FRAUD-COMMON-BANK-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "bank",
+    "label": "Bank account-locked lure"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "your account has been locked",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "verify your password",
+     "weight": 3
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "confirm your PIN",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "re-enter your card number",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "6-digit code we just sent",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "account will be closed",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "incomplete verification",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "one-time passcode",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "read it to me",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "A locked-account text with a verification link is a credential harvest. Open your banking app directly; never sign in from a message link.",
+   "verifyChannel": "Your bank's official app or the number on your card."
+  },
+  {
+   "id": "FRAUD-COMMON-GRAND-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "family",
+    "label": "Grandparent emergency scam"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "it's me, your grandson",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "don't tell Mom",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "bail money",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "Secrecy plus bail money is the signature of this scam. Call your grandchild and their parents on saved numbers before doing anything else.",
+   "verifyChannel": "Family members' saved phone numbers; local police non-emergency line."
+  },
+  {
+   "id": "FRAUD-COMMON-TECH-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Tech support impersonation"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "your computer has a virus",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "Microsoft support",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "remote access",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "apple id was signed in",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "your account will be disabled",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "windows licence has expired",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "payment by gift card",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "악성코드가 탐지",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "원격 지원을 위해",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "프로그램을 설치하세요",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "antivirus subscription renewed",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "open the refund page",
+     "weight": 3
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Microsoft and Apple never detect viruses on your machine or ask for remote access by message. Close the page or hang up; run your own installed security software.",
+   "verifyChannel": "The vendor's official support site, typed by hand."
+  },
+  {
+   "id": "FRAUD-COMMON-PRIZE-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Prize with claim fee"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "you have won",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "claim fee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "expires in 24 hours",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "A prize that costs money to claim is not a prize. Legitimate winnings never require an advance fee from the winner.",
+   "verifyChannel": "The promoter's official website, typed by hand."
+  },
+  {
+   "id": "FRAUD-COMMON-RENT-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Rental deposit wire scam"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "wire the deposit",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "other renters are waiting",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "cannot show the unit",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "viewing is possible after payment",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "pay the first month by e-transfer",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "holding fee by gift card",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "계약금부터 입금",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "집주인이 해외",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "사진만 보고 계약",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "오늘 입금하면",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "A landlord who cannot show the unit but demands a wired deposit is a known listing-clone pattern. View the property and verify ownership before any payment.",
+   "verifyChannel": "Land title office or the platform's official support."
+  },
+  {
+   "id": "FRAUD-COMMON-CRYPTO-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Crypto doubling scam"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "double your bitcoin",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "send first to verify your wallet",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "No giveaway doubles crypto; the verification transfer is simply stolen. Treat every send-first scheme as theft.",
+   "verifyChannel": "Your exchange's official app; the promoter's verified channels only."
+  },
+  {
+   "id": "FRAUD-COMMON-HR-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Payroll diversion lure"
+   },
+   "bones": [
+    "AUTHORITY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "update your direct deposit",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "before payroll closes",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Payroll changes are never collected through a message link. Use your employer's HR system the way you normally reach it, and confirm with HR by phone.",
+   "verifyChannel": "Your employer's HR department on its internal number."
+  },
+  {
+   "id": "FRAUD-COMMON-UTIL-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Utility shutoff threat"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "power will be disconnected",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "within 30 minutes",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "pay now to avoid",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Utilities follow formal notice periods and never collect instant payment by text link. Check your account in the utility's own app.",
+   "verifyChannel": "The utility's published customer number."
+  },
+  {
+   "id": "FRAUD-COMMON-IMMIG-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "police",
+    "label": "Immigration enforcement impersonation"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "deportation",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "pay the bond",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "do not contact a lawyer",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "Immigration authorities do not collect bonds by phone or forbid lawyers. 'Do not contact a lawyer' is itself the loudest alarm in this script.",
+   "verifyChannel": "An immigration lawyer or legal aid line of your own choosing."
+  },
+  {
+   "id": "FRAUD-COMMON-MULE-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Money mule recruitment"
+   },
+   "bones": [
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "receive payments and forward",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "keep a commission",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "work from home, no experience",
+     "weight": 1
+    }
+   ],
+   "severity": "high",
+   "guidance": "Forwarding other people's money for a commission is money laundering, and the account holder carries the legal risk. Decline and report the recruiter.",
+   "verifyChannel": "Your bank's fraud line or local police non-emergency line."
+  },
+  {
+   "id": "FRAUD-COMMON-TRANSFER-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Vague transfer request (insufficient context)"
+   },
+   "bones": [
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "송금 부탁",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "send the money first",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "explain later",
+     "weight": 1
+    }
+   ],
+   "severity": "medium",
+   "guidance": "A transfer request with no named sender, institution, or reason cannot be verified from the text alone. Do not act on it until the requester confirms through a channel you already trust.",
+   "verifyChannel": "The requester, reached on a number or channel you already had."
+  },
+  {
+   "id": "CLAUSE-PENALTY-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Excessive late penalty with acceleration"
+   },
+   "clauseRisk": [
+    "excessive-penalty",
+    "acceleration"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "penalty of",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "accrues daily",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "entire balance becomes due",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "liquidated damages",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "accelerate",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "become payable immediately",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Ask before signing: Is the penalty capped? Does a short delay really make the full balance due at once? Get the total worst-case cost in writing.",
+   "verifyChannel": "A consumer lawyer or your provincial/state consumer protection office."
+  },
+  {
+   "id": "CLAUSE-GUARANTOR-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Blanket joint-and-several guarantee"
+   },
+   "clauseRisk": [
+    "joint-guarantee",
+    "future-debt-blanket"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "joint and several liability",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "all present and future debts",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Ask before signing: Does the guarantee cover future debts you have not seen? Is there a fixed ceiling and an end date? A blanket guarantee can outlive the loan it was signed for.",
+   "verifyChannel": "Independent legal advice — guarantors are entitled to it before signing."
+  },
+  {
+   "id": "CLAUSE-RENEWAL-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Auto-renewal with unilateral amendment"
+   },
+   "clauseRisk": [
+    "auto-renewal-trap",
+    "unilateral-amendment"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "renews automatically",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "unless cancelled in writing",
+     "weight": 1
+    },
+    {
+     "kind": "phrase",
+     "value": "may amend any term",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Ask before signing: How long is each renewal, what is the exact cancellation deadline, and can the other side change terms you already agreed to?",
+   "verifyChannel": "Consumer protection office; calendar the cancellation deadline before signing."
+  },
+  {
+   "id": "CLAUSE-ARBITRATION-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Court-rights waiver"
+   },
+   "clauseRisk": [
+    "court-rights-waiver"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "waive your right to a jury trial",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "binding arbitration",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "class action waiver",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Ask before signing: Which disputes are forced into arbitration, where would it be held, and who pays the arbitrator's fees if you lose?",
+   "verifyChannel": "A consumer lawyer for contracts above a small amount."
+  },
+  {
+   "id": "CLAUSE-CONFESSION-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Confession of judgment"
+   },
+   "clauseRisk": [
+    "judgment-without-trial"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "confession of judgment",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "judgment without notice",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "This clause lets the other side obtain a court judgment without suing you first. It is banned for consumers in many jurisdictions — treat its presence as a stop sign.",
+   "verifyChannel": "A lawyer before signing; do not sign the same day."
+  },
+  {
+   "id": "CLAUSE-PERSONAL-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Personal guarantee inside a business contract"
+   },
+   "clauseRisk": [
+    "personal-guarantee"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "personally guarantee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "personal assets",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Ask before signing: Are you signing as the company or as yourself? A personal guarantee puts your house and savings behind a business debt.",
+   "verifyChannel": "Independent legal advice for the individual guarantor."
+  },
+  {
+   "id": "CLAUSE-DEBIT-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Unlimited direct-debit authority"
+   },
+   "clauseRisk": [
+    "unlimited-debit-authority"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "withdraw any amount",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "any account you hold",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Ask before signing: Which single account, what maximum amount, and how do you revoke the authority? Open-ended debit rights are not a normal billing term.",
+   "verifyChannel": "Your bank — ask how a pre-authorized debit can be stopped."
+  },
+  {
+   "id": "CLAUSE-INDEMNITY-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "One-sided indemnity"
+   },
+   "clauseRisk": [
+    "one-sided-indemnity"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "indemnify and hold harmless",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "any and all claims arising",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Ask before signing: Does the indemnity cover the other side's own mistakes? Is there a cap tied to the contract value?",
+   "verifyChannel": "A contract lawyer for business agreements."
+  },
+  {
+   "id": "CLAUSE-TERMINATION-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "One-sided termination"
+   },
+   "clauseRisk": [
+    "one-sided-termination"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "terminate at any time without cause",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "you may not terminate",
+     "weight": 3
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Ask before signing: Can both sides exit on the same terms? If only they can leave, what compensation applies when they do?",
+   "verifyChannel": "Consumer protection office or a contract lawyer."
+  },
+  {
+   "id": "CLAUSE-EXCLUSIVITY-001",
+   "type": "contract-clause",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Broad exclusivity / non-compete"
+   },
+   "clauseRisk": [
+    "exclusivity-lock-in"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "shall not provide services to any third party",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "exclusive services",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Ask before signing: How long does the exclusivity last, what work exactly does it cover, and does it survive the end of the contract?",
+   "verifyChannel": "An employment or contract lawyer before signing."
+  },
+  {
+   "id": "SCAM-CA-MED-001",
+   "type": "insurance-scam",
+   "locale": "CA",
+   "impersonation": {
+    "institutionType": "insurer",
+    "label": "Provincial health billing impersonation (CA)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "must be settled today",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "avoid collections",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "Do not discuss this with family",
+     "weight": 3
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Provincial health plans do not collect emergency balances through text links or demand secrecy from family. Call the number on your health card or the hospital's billing office directly.",
+   "verifyChannel": "Your provincial health ministry line or the hospital billing office."
+  },
+  {
+   "id": "SCAM-US-MED-001",
+   "type": "insurance-scam",
+   "locale": "US",
+   "impersonation": {
+    "institutionType": "insurer",
+    "label": "Medicare card replacement scam (US)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "your Medicare number",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "new plastic card",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "confirm to keep your coverage",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Medicare never calls to issue replacement cards or asks for your Medicare number to keep coverage active. Guard the number like a bank password.",
+   "verifyChannel": "Medicare at 1-800-633-4227 (US)."
+  },
+  {
+   "id": "SCAM-COMMON-INS-001",
+   "type": "insurance-scam",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "insurer",
+    "label": "Insurance premium refund lure"
+   },
+   "bones": [
+    "AUTHORITY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "premium refund",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "confirm your policy number",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Insurers refund through the payment method already on file; they do not collect policy numbers through message links. Open your insurer's app instead.",
+   "verifyChannel": "Your insurer's published claims line."
+  },
+  {
+   "id": "SCAM-COMMON-INS-002",
+   "type": "insurance-scam",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "insurer",
+    "label": "Fake claim settlement fee"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "settlement cheque",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "pay the processing fee first",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "A settlement that requires you to pay a fee first is an advance-fee scam wearing an insurance costume. Real claim payments never move in that order.",
+   "verifyChannel": "Your insurer's published claims line; your claim number from official mail."
+  },
+  {
+   "id": "SCAM-KR-MED-001",
+   "type": "insurance-scam",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "insurer",
+    "label": "National health insurance refund impersonation (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "건강보험 환급금",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "본인 계좌로 신청",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Health insurance refunds are applied for inside the official NHIS channels, never through a text link asking for your account. Type the NHIS address yourself.",
+   "verifyChannel": "National Health Insurance Service 1577-1000 (KR)."
+  },
+  {
+   "id": "SCAM-COMMON-MED-001",
+   "type": "insurance-scam",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "insurer",
+    "label": "Pharmacy payment confirmation lure"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "your prescription is ready",
+     "weight": 1
+    },
+    {
+     "kind": "phrase",
+     "value": "confirm payment details",
+     "weight": 3
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "your medication is ready",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "verify your insurance",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Pharmacies do not collect payment details through message links for a ready prescription. Call the pharmacy on the number from your prescription label.",
+   "verifyChannel": "Your pharmacy's number from the prescription label."
+  },
+  {
+   "id": "FRAUD-COMMON-DELIVERY-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Courier delivery / customs fee lure (EN)"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "could not be delivered",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "redelivery fee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "delivery confirmation fee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "customs duty payment",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "held at the depot",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Couriers and customs do not collect small release or redelivery fees through text links. Track the parcel or contact customs through the official site you type yourself.",
+   "verifyChannel": "The courier's official app or website, typed by hand."
+  },
+  {
+   "id": "FRAUD-CA-INTERAC-001",
+   "type": "smishing",
+   "locale": "CA",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Interac e-Transfer deposit lure"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "Interac e-Transfer",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "auto-deposit failed",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "deposit your money",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Interac never sends deposit links by text; e-Transfers land in your bank account or your bank's own app. Open your banking app directly and check there.",
+   "verifyChannel": "Your bank's official app or the number on your card."
+  },
+  {
+   "id": "FRAUD-CA-SIN-001",
+   "type": "smishing",
+   "locale": "CA",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Service Canada SIN suspension scam"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "SIN has been suspended",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "your benefits will stop",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "speak with an officer",
+     "weight": 1
+    }
+   ],
+   "severity": "high",
+   "guidance": "Service Canada does not suspend a SIN by phone or text, and benefits are never stopped for refusing a call. Hang up and call Service Canada on its published number.",
+   "verifyChannel": "Service Canada official lines (1-800-622-6232, CA)."
+  },
+  {
+   "id": "FRAUD-COMMON-FINE-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Fine / toll / ticket payment lure"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "missed jury duty",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "bench warrant",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "parking ticket",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "photo radar ticket",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "unpaid toll",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "407 ETR",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "scan the qr code",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "boot fee",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "과태료",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "가산금",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "qr code on the meter",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "scan the qr code in this email",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "receive your refund",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "qr을 찍어",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "qr code on the charger",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Fines and tolls are not collected through text-message links or QR codes in notices, and courts never sell warrant avoidance by phone. Check the issuing authority's official site, typed by hand.",
+   "verifyChannel": "The court's, city's, or toll operator's official website, typed by hand."
+  },
+  {
+   "id": "FRAUD-COMMON-TELCO-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Telco billing / suspension lure"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "avoid suspension",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "update your payment method",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "요금 미납",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "이용이 정지",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "you did not request",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Carriers do not collect billing fixes or plan-change cancellations through text links. Open the carrier's own app or call the number on your bill.",
+   "verifyChannel": "Your carrier's official app or the number on your bill."
+  },
+  {
+   "id": "FRAUD-COMMON-FAMILY-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Family member new-number impersonation (EN)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "this is my new number",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "don't call my old number",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "I changed my number",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "stuck at the airport",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "pay you back tonight",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "lost my wallet and phone",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "wired for a flight home",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "A new number plus a story that blocks calling the old number is the standard setup. Call the family member's saved number, or ask a question only they can answer, before sending anything.",
+   "verifyChannel": "The family member's previously saved phone number."
+  },
+  {
+   "id": "FRAUD-KR-FSS-001",
+   "type": "voice-lure",
+   "locale": "KR",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Financial Supervisory Service loan-cancel script (KR)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "금융감독원",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "기존 대출을 상환",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "상환금을 보내",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "The Financial Supervisory Service never orders a loan repayment to a designated account to block a new loan. Hang up and verify through the FSS 1332 line or your lender directly.",
+   "verifyChannel": "Financial Supervisory Service 1332 (KR) or your lender's published number."
+  },
+  {
+   "id": "FRAUD-COMMON-INVEST-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Guaranteed-return investment lure (EN)"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "guaranteed minimum",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "principal protected",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "guaranteed by the treasury",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "guaranteed returns",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "wire funds today",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "my uncle's analyst",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "withdraw a small profit first",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "unauthorized withdrawal",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "move your coins",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "secure wallet we provide",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "recovery firm",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "tracing fee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "return your coins",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Guaranteed returns, rescue wallets, and pay-a-fee-to-recover schemes are three costumes for the same theft. No licensed institution guarantees returns or moves your assets to a wallet it provides by message.",
+   "verifyChannel": "Your provincial securities regulator or the exchange's official app."
+  },
+  {
+   "id": "FRAUD-COMMON-ROMANCE-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Romance scam money request"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "replacement officer fee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "I will repay you double",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "stuck at customs",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "release fees",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "send a gift card",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "해외 파병",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "휴가 신청 비용",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "storage company",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "half the gold is yours",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "needs surgery tomorrow",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "won't start without a deposit",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Fees to release leave, goods, inheritances, or hospital care are the romance scam's collection step; the emergency is scripted and the debt is never repaid. Never send money to someone you have not met in person.",
+   "verifyChannel": "A trusted family member or your local police non-emergency line."
+  },
+  {
+   "id": "FRAUD-COMMON-TASKJOB-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Task job / fake-cheque job scam"
+   },
+   "bones": [
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "top up your work account",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "unlock higher-paying tasks",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "task job",
+     "weight": 1
+    },
+    {
+     "kind": "phrase",
+     "value": "cheque we mailed you",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "buy the required software",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "hand the login",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "signup bonus",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Jobs that require topping up an account, buying software with a mailed cheque, or handing over an account login are fee and laundering scams. A real employer never charges you to start work.",
+   "verifyChannel": "Your bank's fraud line (for the cheque) or local police non-emergency line."
+  },
+  {
+   "id": "FRAUD-COMMON-STREAM-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Streaming / account-on-hold billing lure"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "payment was declined",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "account is on hold",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "update your payment method",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Streaming and subscription services do not collect payment fixes through text links. Open the service's own app or type its address yourself to check the account.",
+   "verifyChannel": "The service's official app or website, typed by hand."
+  },
+  {
+   "id": "FRAUD-COMMON-TRAVEL-001",
+   "type": "smishing",
+   "locale": "CA",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Flight cancellation compensation fee lure"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "flight was cancelled",
+     "weight": 1
+    },
+    {
+     "kind": "phrase",
+     "value": "verification payment",
+     "weight": 3
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Airlines never charge a verification payment to process compensation or a rebooking. Rebook inside the airline's own app or on its official site.",
+   "verifyChannel": "The airline's official app or website, typed by hand."
+  },
+  {
+   "id": "FRAUD-COMMON-RECOVERY-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "recovery-firm",
+    "label": "Fraud-recovery firm impersonation"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "recovery processing fee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "recovered funds",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "recovery team",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "security deposit is required",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "we have recovered",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "피해금",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "회수 수수료",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "회수했습니다",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "되찾아 드립니다",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "추적에 성공",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "먼저 보내 주시면",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "No legitimate firm recovers scammed money for an upfront fee or deposit, and recovery is never guaranteed. Report the original loss and any 'recovery' contact to the police and the anti-fraud centre; do not pay again.",
+   "verifyChannel": "Police 112 (KR) or the Canadian Anti-Fraud Centre / local police non-emergency line (CA)."
+  },
+  {
+   "id": "FRAUD-COMMON-BANKINV-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "bank",
+    "label": "Bank investigator impersonation"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "fraud investigation unit",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "hand it to our investigator",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "do not tell the branch staff",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "under suspicion",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "investigator's safe account",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "do not discuss it with any bank employee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "undercover operation",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "pass it to our officer",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "조사관입니다",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "조사관에게 전달",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "용의자이니",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "횡령 수사",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Banks and police never ask customers to withdraw cash, hand it to an investigator, or move money for an undercover operation, and never forbid telling branch staff. End the call and contact the bank on the number printed on your card.",
+   "verifyChannel": "The official number on your bank card, or police 112 (KR)."
+  },
+  {
+   "id": "FRAUD-COMMON-MERCH-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Fake storefront / merchandise non-delivery"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "today only at this price",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "gift cards only",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "warehouse clearance",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "flash sale",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "no credit cards",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "재고 정리",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "오늘만 이 가격",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "계좌이체로만",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "반값 특가",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "무통장 입금만",
+     "weight": 3
+    }
+   ],
+   "severity": "medium",
+   "guidance": "A seller who refuses credit cards and demands e-transfer, bank transfer, or gift cards only leaves you no way to reverse the payment. Buy through established platforms with buyer protection and check the seller's real-world presence first.",
+   "verifyChannel": "The platform's official site or app, typed by hand; consumer protection office for your province/state."
+  },
+  {
+   "id": "FRAUD-COMMON-EXTORT-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Extortion / sextortion blackmail"
+   },
+   "bones": [
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "recorded you",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "within 48 hours",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "send the video to all your contacts",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "pay in bitcoin",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "goes to everyone in your address book",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "영상을 녹화",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "연락처 전체에 유포",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "비트코인으로 보내",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "비밀번호를 알고 있습니다",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "영상을 전부 공개",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Mass extortion mail almost never has real footage; paying marks you as a payer and the threats usually stop on their own. Do not pay or reply, save the message, change reused passwords, and report it to the police and the anti-fraud centre.",
+   "verifyChannel": "Police 112 (KR) or the Canadian Anti-Fraud Centre / local police non-emergency line (CA)."
+  },
+  {
+   "id": "FRAUD-COMMON-BEC-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "business-counterparty",
+    "label": "Supplier invoice / bank-detail change fraud (BEC)"
+   },
+   "bones": [
+    "AUTHORITY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "bank account has changed",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "remit payment to our new account",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "updated banking details",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "new account details",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "updated our payment information",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "입금 계좌가 변경",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "새 계좌로 입금",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "입금 후 확인 부탁",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "switched banks",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "send this payment to the new account",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "A bank-detail change announced by email alone is a classic business email compromise. Before paying to any new account, call the supplier on the number you already have on file (not one from the message) and confirm the change out of band.",
+   "verifyChannel": "The supplier's phone number from your own existing records or contract, never from the message."
+  },
+  {
+   "id": "FRAUD-COMMON-INHERIT-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Foreign inheritance / money-movement offer"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "sole beneficiary",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "unclaimed inheritance",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "legal and transfer fees",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "move the funds",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "documentation fee in advance",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "수혜자로 지정",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "법적 수수료를 먼저",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "selected to receive",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "processing fee is required before",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Real inheritances and grants never arrive by unsolicited message and never require the recipient to pay legal, transfer, or documentation fees in advance. Fees-first is the advance-fee fraud signature; do not respond or send documents.",
+   "verifyChannel": "Police 112 (KR) or the Canadian Anti-Fraud Centre / local police non-emergency line (CA)."
+  },
+  {
+   "id": "FRAUD-COMMON-CHARITY-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "charity",
+    "label": "Charity / disaster-relief impersonation"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "text relief to",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "donate today",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "donate by gift card",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "urgent appeal",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "재해 피해자를 위해",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "지금 기부해 주세요",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "문자 기부",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "donation doubles",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "give now to help",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Real charities do not pressure instant donations by text, gift card, or e-transfer. Look the charity up in the official registry and donate through its own website, typed by hand.",
+   "verifyChannel": "The charity's official website from the government charity registry (CA) or 1365 donation portal (KR)."
+  },
+  {
+   "id": "FRAUD-COMMON-DEBTCOLL-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "collection-agency",
+    "label": "Debt collection impersonation"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "outstanding debt",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "settle now for",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "collection agency",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "a lawsuit will be filed",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "미납 채무",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "일부만 내시면 종결",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "소송과 압류",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "wage garnishment",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "pay the amount owing immediately",
+     "weight": 2
+    }
+   ],
+   "severity": "high",
+   "guidance": "Legitimate collectors must identify themselves and the creditor in writing and cannot threaten arrest or same-day lawsuits to force payment. Demand written validation of the debt and check the agency's licence before paying anything.",
+   "verifyChannel": "Your province/state consumer protection office, or police 112 (KR) if threats continue."
+  },
+  {
+   "id": "FRAUD-COMMON-PET-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Pet sale / delivery fee scam"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "puppies for sale",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "pay the delivery fee first",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "transport crate fee",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "vaccination fee",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "순종 강아지 분양",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "배송비만 먼저 입금",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "kittens available",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "deposit plus shipping is required",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "In pet-sale fraud the animal does not exist; after the first fee, new charges (crates, vaccines, permits) keep appearing. Meet the animal in person or by live video, and never pay delivery or release fees to an unseen seller.",
+   "verifyChannel": "Local animal-welfare or consumer protection office; report listings to the platform."
+  },
+  {
+   "id": "FRAUD-COMMON-CONTRACTOR-001",
+   "type": "smishing",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "none",
+    "label": "Home-repair contractor deposit scam"
+   },
+   "bones": [
+    "URGENCY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "in your neighbourhood this week",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "deposit by cash or e-transfer",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "sign today for",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "deposit is required up front",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "working on your street",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "동네에서 지붕 공사",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "오늘 계약하시면 할인",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "계약금부터 이체",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "send the deposit today",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "to hold the crew",
+     "weight": 2
+    }
+   ],
+   "severity": "medium",
+   "guidance": "Itinerant crews who demand a cash or e-transfer deposit before starting, with a today-only discount, commonly vanish or do worthless work. Use a licensed contractor with a written contract, verify the business registration, and never pay the full deposit up front.",
+   "verifyChannel": "Your province/state consumer protection office or municipal licensing office."
+  },
+  {
+   "id": "FRAUD-COMMON-EXEC-001",
+   "type": "voice-lure",
+   "locale": "COMMON",
+   "impersonation": {
+    "institutionType": "executive",
+    "label": "Executive / deepfake transfer instruction"
+   },
+   "bones": [
+    "AUTHORITY",
+    "URGENCY",
+    "SECRECY",
+    "PAYMENT"
+   ],
+   "signals": [
+    {
+     "kind": "phrase",
+     "value": "strictly confidential",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "before any announcement",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "do not share this with anyone",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "keep it between us",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "until the press release",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "극비 인수",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "발표 전에 먼저 송금",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "공유하지 마세요",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "complete the wire transfer",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "do not discuss it with finance",
+     "weight": 3
+    }
+   ],
+   "severity": "high",
+   "guidance": "A transfer order wrapped in secrecy — especially one that bypasses finance or the board, however real the voice or video looked — is the deepfake-executive pattern. Stop and verify through a second, pre-existing channel (call the person on a known number) before any payment.",
+   "verifyChannel": "The executive's known phone number or your company's finance department, reached independently of the message."
+  }
+ ]
 }
