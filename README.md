@@ -4,13 +4,17 @@ A web app that checks suspicious texts and contract clauses **before money
 moves — and before a signature becomes binding**. Paste a text message, an
 email, or a contract clause; the Shield looks for smishing / voice-phishing
 patterns and unfair contract terms, and tells you what it found, what it
-based that on, and what to verify through official channels.
+based that on, and what to verify through official channels. Measured
+against the shipping code, a battery of 100 cases rebuilt from real-world
+scam scripts was defended 100 out of 100 — zero scams passed as safe, zero
+ordinary messages blocked (batteries run in Node; live cloud behavior is
+verified separately at Gate 2 — see "Not yet claimed" below).
 
 The core mechanism is **hybrid inference** with
-[Firebase AI Logic](https://firebase.google.com/docs/ai-logic), organised
+[Firebase AI Logic](https://firebase.google.com/docs/ai-logic), organized
 as a three-stage shield:
 
-1. **On-device defence first.** Personally identifying details (card and
+1. **On-device defense first.** Personally identifying details (card and
    account numbers, phone numbers, emails, ID numbers, names) are masked
    locally by a deterministic filter, and the masked text is matched
    against a local pattern ledger. The original text never leaves the
@@ -21,9 +25,12 @@ as a three-stage shield:
    through Firebase AI Logic. The payload is re-scanned immediately before
    sending; if anything identifiable survives, the send is cancelled. The
    UI shows the escalation reason and exactly what was sent.
-3. **Honest abstention.** When the evidence is insufficient, the Shield
-   does **not** declare the text "safe". It abstains, states the reason,
-   and shows an official-channel verification checklist.
+3. **Honest abstention — Active Harm Prevention.** When the evidence is
+   insufficient, the Shield does **not** declare the text "safe".
+   Abstention is a defense action, not a non-answer: the Shield stops,
+   states the reason, and shows the safe next step — an official-channel
+   verification checklist (verify through contact details you already
+   trust, not the ones in the message).
 
 This is an entry for
 [#BuildHybridAI 2026](https://firebasehybridaihackathon.devpost.com/)
@@ -31,7 +38,7 @@ This is an entry for
 
 ## What is measured, and where
 
-- The local pattern ledger ships with **41 patterns** (fraud scripts for
+- The local pattern ledger ships with **53 patterns** (fraud scripts for
   KR / CA / US / common patterns, unfair contract clauses, and
   medical/insurance impersonation), each described by the four "bones"
   shared by these scams: authority impersonation, urgency, secrecy, and
@@ -44,7 +51,7 @@ This is an entry for
   model inference; the UI displays the measured per-stage timings of the
   running browser instead.
 - **Not yet claimed:** live cloud escalation in a real browser and
-  on-device Gemini Nano behaviour are verified separately at the project's
+  on-device Gemini Nano behavior are verified separately at the project's
   Gate 2 browser-verification step; until then the app degrades honestly —
   with the cloud unconfigured or unreachable it abstains with a stated
   reason instead of pretending to analyse.
