@@ -41,6 +41,16 @@
      "kind": "structure",
      "value": "link+account",
      "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "범죄에 이용되어 동결",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "자금을 옮기신 후",
+     "weight": 2
     }
    ],
    "severity": "high",
@@ -79,6 +89,11 @@
     {
      "kind": "structure",
      "value": "link",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "본인 명의로 대출이 실행",
      "weight": 2
     }
    ],
@@ -263,6 +278,11 @@
     {
      "kind": "phrase",
      "value": "세관에 유치",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "배송이 중단",
      "weight": 2
     }
    ],
@@ -529,6 +549,11 @@
      "kind": "phrase",
      "value": "병원비부터",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "자식이 무사하려면",
+     "weight": 2
     }
    ],
    "severity": "high",
@@ -666,6 +691,16 @@
      "kind": "phrase",
      "value": "read it to me",
      "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "continue using online banking",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "noticed a new device",
+     "weight": 2
     }
    ],
    "severity": "high",
@@ -785,6 +820,16 @@
      "kind": "structure",
      "value": "link",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "was signed in from",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "if this wasn't you",
+     "weight": 2
     }
    ],
    "severity": "high",
@@ -886,6 +931,16 @@
      "kind": "phrase",
      "value": "오늘 입금하면",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "holding fee",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "the last room went",
+     "weight": 2
     }
    ],
    "severity": "medium",
@@ -914,6 +969,16 @@
      "kind": "phrase",
      "value": "send first to verify your wallet",
      "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "receive double back",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "doubling all bitcoin",
+     "weight": 2
     }
    ],
    "severity": "high",
@@ -980,6 +1045,16 @@
     {
      "kind": "phrase",
      "value": "pay now to avoid",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "service will be disconnected",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "reconnection fee",
      "weight": 2
     }
    ],
@@ -1551,6 +1626,11 @@
      "kind": "structure",
      "value": "link",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "당일 입금",
+     "weight": 2
     }
    ],
    "severity": "medium",
@@ -1642,6 +1722,31 @@
      "kind": "structure",
      "value": "link",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "pay now to release",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "is on hold pending",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "incorrect postal code",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "update your address within",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "before release",
+     "weight": 2
     }
    ],
    "severity": "medium",
@@ -1715,6 +1820,16 @@
      "kind": "phrase",
      "value": "speak with an officer",
      "weight": 1
+    },
+    {
+     "kind": "phrase",
+     "value": "protected account",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "social insurance number was found",
+     "weight": 2
     }
    ],
    "severity": "high",
@@ -1813,6 +1928,16 @@
     {
      "kind": "phrase",
      "value": "qr code on the charger",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "before it doubles",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "is unpaid and will double",
      "weight": 2
     }
    ],
@@ -2111,6 +2236,11 @@
     {
      "kind": "phrase",
      "value": "won't start without a deposit",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "book the flight",
      "weight": 2
     }
    ],

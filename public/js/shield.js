@@ -49,6 +49,9 @@ export const ABSTAIN = {
   ENGINE: "ABSTAIN_ENGINE",
 };
 
+// Upper length (characters) for the short-input abstention policy below.
+export const SHORT_INPUT_MAX_CHARS = 80;
+
 export const OFFICIAL_CHECKLIST = [
   "Stop — do not send money or sign anything yet.",
   "Reach the institution through a channel you already trust: the number on your card, its official app, or its published website typed by hand — never a contact from the message itself.",
@@ -160,6 +163,22 @@ export async function analyzeText(rawText, options) {
 
   // --- Branch: no signals ----------------------------------------------------
   if (score.band === "none") {
+    // Short-input policy (2026-11-24 fix round, pilot proposal #5): a single
+    // very short sentence carries almost no evidence either way, so the
+    // honest answer is abstention, not a clean bill. The 10,000-mutant
+    // pilot's border bucket showed first-sentence-only fraud texts of up to
+    // 72 characters passing as "no signals"; the limit below covers that
+    // measured range. Longer or multi-sentence texts keep the plain
+    // no-signals verdict.
+    const trimmed = rawText.trim();
+    // Decimal points inside amounts ("$899.99") are not sentence breaks.
+    const sentenceCount = trimmed.replace(/(\d)\.(\d)/g, "$1$2")
+      .split(/[.!?…]+/).filter((s) => s.trim().length > 0).length;
+    if (trimmed.length <= SHORT_INPUT_MAX_CHARS && sentenceCount <= 1) {
+      return finish({ ...base, verdict: VERDICT.ABSTAINED, route: "abstained",
+        abstainCode: ABSTAIN.INSUFFICIENT_EVIDENCE,
+        message: "This text is very short — a single brief line carries too little context to judge. Treat it as unverified: if it asks for money, codes, or personal data, check through an official channel first." });
+    }
     return finish({ ...base, verdict: VERDICT.NO_SIGNALS, route: "on-device" });
   }
 
