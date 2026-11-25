@@ -168,9 +168,53 @@ function structureHolds(kind, mask) {
       return (mask.byType.CARD || 0) > 0;
     case "phone":
       return (mask.byType.PHONE || 0) > 0;
+    case "attachment":
+      return attachmentGrades(mask).length > 0;
+    case "attachment:web":
+      return attachmentGrades(mask).includes("web");
+    case "attachment:exec":
+      return attachmentGrades(mask).includes("exec");
+    case "attachment:archive":
+      return attachmentGrades(mask).includes("archive");
+    case "attachment:other":
+      return attachmentGrades(mask).includes("other");
+    case "attachment:doc":
+      return attachmentGrades(mask).includes("doc");
     default:
       return false;
   }
+}
+
+// Attachment grades ride on the mask object as a normalized summary
+// ({ grades: [...] }) produced by shield.js from user-declared metadata.
+// Only grades — never file names — reach the scorer.
+function attachmentGrades(mask) {
+  return mask && mask.attachments && Array.isArray(mask.attachments.grades)
+    ? mask.attachments.grades
+    : [];
+}
+
+// --- Negation guard (marketplace supplement, 2026-11-24) -------------------
+// Patterns flagged negationGuard are scored over a guarded copy of the
+// text: within each clause (split on sentence punctuation, commas and
+// newlines), everything from the first negation cue onward is replaced by
+// filler, so a lure phrase that is only being quoted or refused ("I won't
+// arrange payment directly outside the platform") does not fire. The
+// filler is a non-space character so the whitespace-stripped view cannot
+// rejoin the two sides. Unflagged patterns keep the standard views, so
+// the existing ledger behaves exactly as before.
+const NEGATION_CUE = /\bnot\b|\bnever\b|\bcannot\b|\bno longer\b|n't/i;
+
+function guardNegations(text) {
+  return text
+    .split(/([.!?…;,\n]+)/)
+    .map((part, i) => {
+      if (i % 2 === 1) return part;
+      const m = NEGATION_CUE.exec(part);
+      if (!m) return part;
+      return part.slice(0, m.index) + "#".repeat(part.length - m.index);
+    })
+    .join("");
 }
 
 // scoreText(maskedText, mask, patterns) -> {
@@ -184,24 +228,47 @@ function structureHolds(kind, mask) {
 export function scoreText(maskedText, mask, patterns) {
   const haystack = maskedText.toLowerCase();
   const views = buildMatchViews(haystack);
+  const guardedViews = patterns.some((p) => p.negationGuard)
+    ? buildMatchViews(guardNegations(haystack))
+    : null;
   const matched = [];
   let totalScore = 0;
 
   for (const pattern of patterns) {
+    const pviews = pattern.negationGuard && guardedViews ? guardedViews : views;
     let phraseScore = 0;
     let structureScore = 0;
+    const groupBest = new Map();
     for (const signal of pattern.signals) {
       if (signal.kind === "phrase") {
-        if (phraseHit(signal.value, views)) phraseScore += signal.weight;
+        if (!phraseHit(signal.value, pviews)) continue;
+        // Grouped phrase signals are mutually exclusive phrasings of one
+        // lure (e.g. the ways to say "outside the platform"): only the
+        // strongest matched phrasing counts, so stacked variants of the
+        // same lure cannot inflate the score.
+        if (signal.group) {
+          if (signal.weight > (groupBest.get(signal.group) || 0)) {
+            groupBest.set(signal.group, signal.weight);
+          }
+        } else {
+          phraseScore += signal.weight;
+        }
       } else if (signal.kind === "structure") {
         if (structureHolds(signal.value, mask)) structureScore += signal.weight;
       }
     }
+    for (const w of groupBest.values()) phraseScore += w;
+    // A pattern cap bounds its phrase evidence (structure is added after
+    // the cap): claim-only patterns can never reach a strong verdict on
+    // assertions alone, however many claims are stacked.
+    const cap = Number(pattern.cap);
+    const effectivePhrase =
+      Number.isFinite(cap) && cap > 0 ? Math.min(phraseScore, cap) : phraseScore;
     // Structure corroborates, never originates: a pattern's structural
     // signals (e.g. "contains a link") count only when at least one of its
     // own phrases also matched. Otherwise every link-bearing text would
     // score against every link-bearing pattern at once.
-    const score = phraseScore > 0 ? phraseScore + structureScore : 0;
+    const score = phraseScore > 0 ? effectivePhrase + structureScore : 0;
     if (score > 0) totalScore += score;
     if (score >= THRESHOLDS.PATTERN_MATCH_MIN) {
       matched.push({

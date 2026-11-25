@@ -52,6 +52,49 @@ export const ABSTAIN = {
 // Upper length (characters) for the short-input abstention policy below.
 export const SHORT_INPUT_MAX_CHARS = 80;
 
+// Marketplace-message surface abstention limit (2026-11-24 supplement,
+// union-conference design V5): on the message surface a text with no
+// local signals still abstains up to this length, and at any length when
+// a high-risk attachment grade is declared — a bare order claim in a
+// chat message carries too little verifiable context for a clean bill.
+export const MESSAGE_ABSTAIN_MAX_CHARS = 160;
+
+// --- Attachment metadata normalization (marketplace supplement) ------------
+// Callers may declare attachment metadata (what the user saw in the chat
+// UI: a file name or a format). Only a risk GRADE is derived here, from
+// the extension chain — invoice.pdf.html grades as "web", because the
+// last extension is what a browser would open. The normalized summary
+// ({ count, grades }) is all that ever reaches scoring, the report, the
+// local history, or the cloud prompt: file names are never propagated.
+const GRADE_BY_EXT = {
+  html: "web", htm: "web", xhtml: "web", svg: "web",
+  exe: "exec", msi: "exec", scr: "exec", bat: "exec", cmd: "exec",
+  com: "exec", js: "exec", jar: "exec", ps1: "exec", vbs: "exec",
+  zip: "archive", rar: "archive", "7z": "archive", tar: "archive", gz: "archive",
+  pdf: "doc", doc: "doc", docx: "doc", xls: "doc", xlsx: "doc",
+  ppt: "doc", pptx: "doc", txt: "doc", csv: "doc", rtf: "doc", odt: "doc",
+};
+const GRADE_RANK = { doc: 1, other: 2, archive: 3, web: 4, exec: 4 };
+
+function gradeOfOne(att) {
+  const src = String((att && (att.name || att.format)) || "").toLowerCase().trim();
+  if (!src) return "other";
+  const parts = src.split(".").map((s) => s.trim()).filter(Boolean);
+  const exts = parts.length > 1 ? parts.slice(1) : parts;
+  let best = null;
+  for (const ext of exts) {
+    const g = GRADE_BY_EXT[ext] || "other";
+    if (best === null || GRADE_RANK[g] > GRADE_RANK[best]) best = g;
+  }
+  return best || "other";
+}
+
+export function normalizeAttachments(attachments) {
+  if (!Array.isArray(attachments) || attachments.length === 0) return null;
+  const grades = [...new Set(attachments.map(gradeOfOne))].sort();
+  return { count: attachments.length, grades };
+}
+
 export const OFFICIAL_CHECKLIST = [
   "Stop — do not send money or sign anything yet.",
   "Reach the institution through a channel you already trust: the number on your card, its official app, or its published website typed by hand — never a contact from the message itself.",
@@ -88,6 +131,10 @@ function buildCloudPrompt(report) {
 //   patterns,                       // ledger patterns (ledger.js loadLedger)
 //   escalate?: (prompt, reason) => Promise<{ route, text, error, cloudMs }>,
 //   nanoConfirm?: (names) => Promise<string[]>,  // confirmed candidate values
+//   surface?: string,               // input surface, e.g. "message" for a
+//                                   // marketplace/chat message (supplement)
+//   attachments?: [{ name?, format?, sizeBytes? }],  // declared attachment
+//                                   // metadata; only grades are derived
 // }
 export async function analyzeText(rawText, options) {
   const totalStart = performance.now();
@@ -130,8 +177,13 @@ export async function analyzeText(rawText, options) {
   }
 
   // --- Tier 1c: ledger scoring --------------------------------------------
+  // Declared attachments are normalized to grades and ride on a copy of
+  // the mask summary; with no attachments declared the mask object is
+  // passed through untouched, so existing surfaces score byte-identically.
+  const attachments = normalizeAttachments(options.attachments);
+  const maskForScoring = attachments ? { ...mask, attachments } : mask;
   const ledgerStart = performance.now();
-  const score = scoreText(mask.maskedText, mask, options.patterns);
+  const score = scoreText(mask.maskedText, maskForScoring, options.patterns);
   timings.ledgerMs = Math.round(performance.now() - ledgerStart);
 
   const base = {
@@ -139,6 +191,7 @@ export async function analyzeText(rawText, options) {
     isolation: { count: mask.isolationCount, byType: mask.byType },
     signals: mask.signals,
     links: mask.links,
+    attachments,
     unconfirmedNames: mask.unconfirmedNames,
     totalScore: score.totalScore,
     band: score.band,
@@ -171,6 +224,20 @@ export async function analyzeText(rawText, options) {
     // measured range. Longer or multi-sentence texts keep the plain
     // no-signals verdict.
     const trimmed = rawText.trim();
+    // Marketplace-message surface (2026-11-24 supplement, design V5):
+    // a chat message with no local signals is not cleared either — short
+    // messages abstain up to a higher limit, and any message declaring a
+    // high-risk attachment grade abstains at any length, because the
+    // attachment itself cannot be inspected here.
+    if (options.surface === "message") {
+      const highRiskAttachment = attachments !== null &&
+        attachments.grades.some((g) => g === "web" || g === "exec" || g === "archive");
+      if (trimmed.length <= MESSAGE_ABSTAIN_MAX_CHARS || highRiskAttachment) {
+        return finish({ ...base, verdict: VERDICT.ABSTAINED, route: "abstained",
+          abstainCode: ABSTAIN.INSUFFICIENT_EVIDENCE,
+          message: "This message carries too little verifiable signal to judge on this device. Treat any order or payment claim in it as unconfirmed until you check it inside the platform itself — and do not open its attachments." });
+      }
+    }
     // Decimal points inside amounts ("$899.99") are not sentence breaks.
     const sentenceCount = trimmed.replace(/(\d)\.(\d)/g, "$1$2")
       .split(/[.!?…]+/).filter((s) => s.trim().length > 0).length;
