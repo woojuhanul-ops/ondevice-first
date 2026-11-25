@@ -31,7 +31,7 @@ export async function getEngineStatus(forceRefresh = false) {
   if (!cachedDetection || forceRefresh) {
     cachedDetection = await detectOnDevice();
   }
-  initFirebase();
+  await initFirebase();
   return {
     onDevice: cachedDetection,
     cloud: {

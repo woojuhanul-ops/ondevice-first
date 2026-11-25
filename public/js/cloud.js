@@ -33,7 +33,7 @@ export async function runCloud(prompt) {
       `Cloud call budget for this session is exhausted (${CLOUD_CALL_BUDGET_PER_SESSION} calls).`
     );
   }
-  const model = getGenerativeModel(CLOUD_MODEL);
+  const model = await getGenerativeModel(CLOUD_MODEL);
   cloudCallsThisSession += 1;
   const result = await model.generateContent(prompt);
   const text = result.response.text();
