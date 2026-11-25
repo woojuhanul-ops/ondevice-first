@@ -3116,6 +3116,249 @@
    "severity": "high",
    "guidance": "A transfer order wrapped in secrecy — especially one that bypasses finance or the board, however real the voice or video looked — is the deepfake-executive pattern. Stop and verify through a second, pre-existing channel (call the person on a known number) before any payment.",
    "verifyChannel": "The executive's known phone number or your company's finance department, reached independently of the message."
+  },
+{
+ "id": "FRAUD-COMMON-ORDERFAKE-001",
+ "type": "smishing",
+ "locale": "COMMON",
+ "impersonation": {
+  "institutionType": "marketplace-counterparty",
+  "label": "Fake buyer / order impersonation"
+ },
+ "bones": [
+  "PAYMENT"
+ ],
+ "signals": [
+  {
+   "kind": "phrase",
+   "value": "paid for your order",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "already placed an order",
+   "weight": 2,
+   "group": "claim-placed"
+  },
+  {
+   "kind": "phrase",
+   "value": "placed an order",
+   "weight": 2,
+   "group": "claim-placed"
+  },
+  {
+   "kind": "phrase",
+   "value": "placed the order",
+   "weight": 2,
+   "group": "claim-placed"
+  },
+  {
+   "kind": "phrase",
+   "value": "submitted an order",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "payment is done",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "payment has been sent",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "my order is ready",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "confirm the order",
+   "weight": 1
+  },
+  {
+   "kind": "phrase",
+   "value": "confirm that you received",
+   "weight": 1
   }
+ ],
+ "severity": "high",
+ "guidance": "A message that claims an order or payment already exists is the fake-buyer pattern when the claim cannot be checked inside the platform. Never open its attachments or links, and never treat the claim itself as proof: check your orders page inside the platform, and only there.",
+ "verifyChannel": "The marketplace's own orders page, opened by you inside the platform app or site — never a link or file from the message.",
+ "negationGuard": true,
+ "cap": 5
+},
+{
+ "id": "FRAUD-COMMON-OFFPLAT-001",
+ "type": "smishing",
+ "locale": "COMMON",
+ "impersonation": {
+  "institutionType": "marketplace-counterparty",
+  "label": "Off-platform payment / contact lure"
+ },
+ "bones": [
+  "PAYMENT",
+  "SECRECY"
+ ],
+ "signals": [
+  {
+   "kind": "phrase",
+   "value": "outside the platform",
+   "weight": 4,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "outside fiverr",
+   "weight": 4,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "outside of the platform",
+   "weight": 4,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "outside of fiverr",
+   "weight": 4,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "off the platform",
+   "weight": 3,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "off fiverr",
+   "weight": 3,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "contact me outside",
+   "weight": 2,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "payment outside",
+   "weight": 2,
+   "group": "locus"
+  },
+  {
+   "kind": "phrase",
+   "value": "arrange payment directly",
+   "weight": 4
+  },
+  {
+   "kind": "phrase",
+   "value": "pay me directly",
+   "weight": 3
+  },
+  {
+   "kind": "phrase",
+   "value": "move to whatsapp",
+   "weight": 3
+  },
+  {
+   "kind": "phrase",
+   "value": "on whatsapp",
+   "weight": 1
+  },
+  {
+   "kind": "phrase",
+   "value": "on telegram",
+   "weight": 1
+  }
+ ],
+ "severity": "high",
+ "guidance": "Moving a conversation or a payment off the marketplace removes the platform's payment protection and dispute process — the standard setup for marketplace fraud. Keep every message and every payment inside the platform, and report the message instead of replying.",
+ "verifyChannel": "The marketplace's own messaging and payment system, used inside the platform.",
+ "negationGuard": true,
+ "cap": 8
+},
+{
+ "id": "FRAUD-COMMON-ATTACH-001",
+ "type": "smishing",
+ "locale": "COMMON",
+ "impersonation": {
+  "institutionType": "marketplace-counterparty",
+  "label": "Attachment lure (fake order document)"
+ },
+ "bones": [
+  "PAYMENT"
+ ],
+ "signals": [
+  {
+   "kind": "phrase",
+   "value": "download this for confirmation",
+   "weight": 3
+  },
+  {
+   "kind": "phrase",
+   "value": "download the attached",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "open the attached file",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "review the attached",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "check the attached",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "review the document i've sent",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "see the attached",
+   "weight": 1
+  },
+  {
+   "kind": "structure",
+   "value": "attachment:web",
+   "weight": 3
+  },
+  {
+   "kind": "structure",
+   "value": "attachment:exec",
+   "weight": 3
+  },
+  {
+   "kind": "structure",
+   "value": "attachment:archive",
+   "weight": 2
+  },
+  {
+   "kind": "structure",
+   "value": "attachment:other",
+   "weight": 2
+  },
+  {
+   "kind": "structure",
+   "value": "attachment:doc",
+   "weight": 1
+  }
+ ],
+ "severity": "high",
+ "guidance": "An attachment offered as proof of an order or payment is a delivery vehicle, not evidence — order documents and payment proofs live inside the platform, not in message attachments. Do not open, download, or run it; check the claim on the platform's orders page instead.",
+ "verifyChannel": "The marketplace's own orders page, opened by you inside the platform app or site.",
+ "negationGuard": true
+}
  ]
 }
