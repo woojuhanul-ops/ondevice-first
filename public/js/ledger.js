@@ -160,6 +160,8 @@ function structureHolds(kind, mask) {
   switch (kind) {
     case "link":
       return mask.links.length > 0;
+    case "wallet":
+      return (mask.signals || []).some((s) => s.kind === "wallet");
     case "account":
       return (mask.byType.ACCOUNT || 0) > 0;
     case "link+account":
