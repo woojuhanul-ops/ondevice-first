@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Credit &amp; Contract Hybrid Shield — OnDevice First</title>
+  <meta name="description" content="The last checkpoint before you send money or sign. Check suspicious texts, emails and contract clauses on your own device. Measured defense rate 99.993% · 0 false positives on normal texts." />
+  <meta name="theme-color" content="#0d1117" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-title" content="Hybrid Shield" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Hybrid Shield — the last checkpoint before money moves" />
+  <meta property="og:description" content="Check suspicious texts, emails and contract clauses on your own device. Your private data never leaves the device. Measured defense rate 99.993% · 0 false positives." />
+  <meta property="og:image" content="og/og-1200x630.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="nexus-press.css" />
+  <script src="nexus-press.js" defer></script>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <div class="brand">
+        <img class="brand-mark" src="icons/icon.svg" alt="" width="44" height="44" />
+        <div>
+          <h1>Hybrid Shield</h1>
+          <p class="brand-sub">Credit &amp; Contract Hybrid Shield</p>
+        </div>
+      </div>
+
+      <p class="hook">
+        <span class="hook-line hook-danger">Before you send money, before you sign — check the suspicious text first.</span>
+        <span class="hook-line">Paste it in and tap <strong>Check</strong> once — it tells you right away whether it looks dangerous, or whether there is not enough evidence to judge.</span>
+        <span class="hook-line">Your personal details are masked on this device and <strong>never leave it.</strong></span>
+      </p>
+
+      <ul class="proof" aria-label="Measured results">
+        <li><span class="proof-num">99.993%</span><span class="proof-cap">scam-text defense rate (measured)</span></li>
+        <li><span class="proof-num">0</span><span class="proof-cap">false positives on normal texts (measured)</span></li>
+        <li><span class="proof-num">100,000</span><span class="proof-cap">cases verified</span></li>
+      </ul>
+
+      <p class="honest">This shield does not “block scams at the source”. It is <strong>the last checkpoint before the damage becomes final</strong>.</p>
+
+      <details class="more">
+        <summary>How does it work?</summary>
+        <p class="lede">
+          <strong>It checks on your device first.</strong> Paste a suspicious text, email or contract
+          clause before you send money or sign. Personal details such as names and account numbers
+          are masked on this device and never leave it. Only when a deeper analysis is needed is the
+          masked skeleton sent to the cloud — and everything that was sent is shown in full on the
+          result screen.
+        </p>
+        <ul class="status-strip" aria-label="Engine status">
+          <li id="status-ondevice">On-device (Gemini Nano): checking…</li>
+          <li id="status-cloud">Cloud (Firebase AI Logic): checking…</li>
+          <li id="status-appcheck">App Check: checking…</li>
+        </ul>
+      </details>
+    </header>
+
+    <div class="layout">
+      <section class="panel" aria-label="Input">
+        <h2>1 · Text to check</h2>
+        <form id="shield-form">
+          <label for="shield-input">Message, email, or contract text</label>
+          <textarea id="shield-input" rows="6" required
+            placeholder="Paste the text here. The original stays in this tab's memory only — it is never stored and never sent anywhere."></textarea>
+          <p class="hint"><span id="char-count">0</span> / <span id="char-max">20000</span> characters</p>
+          <button type="submit" id="analyze-btn" class="nx-press">Check this text</button>
+        </form>
+
+        <details class="more">
+          <summary>Marketplace message or attachment? Mark it here (optional)</summary>
+          <p class="hint">If the message came from a marketplace like Fiverr, mark it below. Do not open the attachment — just tell us that it exists and what format it claims to be. File names are never kept in any check or record.</p>
+          <label class="opt-row">
+            <input type="checkbox" id="opt-surface-message" />
+            This message came from a marketplace or chat
+          </label>
+          <label class="opt-row" for="opt-attach-grade">Attachment
+            <select id="opt-attach-grade">
+              <option value="">No attachment</option>
+              <option value="pdf">Document (PDF · office)</option>
+              <option value="html">Web page (HTML)</option>
+              <option value="exe">Executable file</option>
+              <option value="zip">Archive (zip)</option>
+              <option value="unknown">I don't know the format</option>
+            </select>
+          </label>
+          <label class="opt-row" for="opt-attach-name">Attachment file name (optional — the format is judged by its extension)
+            <input type="text" id="opt-attach-name" autocomplete="off" placeholder="e.g. order-confirmation.html" />
+          </label>
+        </details>
+
+        <div class="scenario-row" role="group" aria-label="Try an example">
+          <span class="scenario-label">Try an example first:</span>
+          <button type="button" class="chip" data-scenario="A">Smishing text</button>
+          <button type="button" class="chip" data-scenario="B">Contract clause</button>
+          <button type="button" class="chip" data-scenario="C">Fake invoice</button>
+          <button type="button" class="chip" data-scenario="D">Too-short text</button>
+        </div>
+
+        <h2>2 · What stays on this device</h2>
+        <p class="hint">Masked preview — placeholders replace personal data before anything else happens:</p>
+        <div id="masked-empty" class="empty-inline">When you run a check, how your personal data gets masked will be shown here.</div>
+        <pre id="masked-preview" class="masked">(nothing yet)</pre>
+        <div id="token-chips" class="chips" aria-label="Masked item types"></div>
+      </section>
+
+      <section class="panel dashboard nx-glow-host" aria-label="Hybrid dashboard">
+        <h2>Result</h2>
+
+        <div id="dash-empty" class="empty-state">
+          <p class="empty-title">Nothing checked yet.</p>
+          <p class="empty-body">Paste a suspicious text on the left (above, on mobile) and press
+          <strong>Check this text</strong> — the result appears here, large.</p>
+        </div>
+
+        <div id="dash-result" hidden>
+          <div class="verdict-head">
+            <span id="dash-verdict-badge" class="badge badge-idle">Not checked</span>
+            <span id="dash-route" class="badge badge-where">Not run yet</span>
+          </div>
+          <p class="route-line">
+            <span id="dash-verdict" class="verdict">No analysis yet.</span>
+          </p>
+          <p id="dash-message" class="message"></p>
+
+          <h3>What to do</h3>
+          <ul id="dash-guidance" class="guidance"></ul>
+
+          <h3>Evidence</h3>
+          <ul id="dash-evidence" class="evidence"></ul>
+
+          <h3>Isolated on this device</h3>
+          <p id="dash-isolation" class="log">0 items masked.</p>
+
+          <h3>Escalation log</h3>
+          <p id="dash-escalation" class="log">No cloud call yet — everything so far ran on this device.</p>
+
+          <details class="tech">
+            <summary>Technical details</summary>
+
+            <p id="dash-tech-code" class="log"></p>
+            <p id="dash-tech-status" class="log"></p>
+
+            <h3>Cloud budget</h3>
+            <p id="dash-budget" class="log">0 / 20 calls this session.</p>
+
+            <h3>Stage timings (measured)</h3>
+            <p id="dash-timings" class="log">—</p>
+
+            <div id="dash-payload-wrap" hidden>
+              <h3>Exactly what was sent to the cloud</h3>
+              <pre id="dash-payload" class="payload"></pre>
+            </div>
+
+            <div id="dash-cloud-wrap" hidden>
+              <h3>Cloud analysis</h3>
+              <pre id="dash-cloud" class="answer"></pre>
+            </div>
+          </details>
+        </div>
+
+        <h3>Local history (this device only)</h3>
+        <ul id="dash-history" class="history"></ul>
+        <button type="button" id="clear-history" class="chip danger">Delete all local history</button>
+      </section>
+    </div>
+
+    <footer>
+      <p>
+        Built for #BuildHybridAI 2026. Hybrid inference via Firebase AI Logic:
+        Gemini Nano on-device first, cloud Gemini by explained escalation,
+        honest abstention when the evidence is not enough. Local verdicts say
+        “matches risk patterns” or “no risk signals found” — this shield never
+        calls a text “safe”. Analysis history is stored only in this browser,
+        masked, and can be wiped above.
+      </p>
+      <p class="proof-note">
+        In an independent 100,000-case run, 6 of 83,000 scam variants were missed (defense rate 99.993%).
+        False positives on 16,600 normal variants: 0. The six misses are compound-corruption cases, left unfixed deliberately this round.
+      </p>
+    </footer>
+  </main>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
