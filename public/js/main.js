@@ -66,12 +66,12 @@ let scenarios = {};
 function renderStatus(status) {
   const nanoReady = status.onDevice.supported && status.onDevice.status === "ready";
   els.onDevice.textContent = nanoReady
-    ? "검사 준비 완료"
-    : "기기 내 기본 검사 준비 완료 (고급 검사 없음 — 기본 검사만으로 충분한 경우가 대부분입니다)";
+    ? "Check is ready"
+    : "Basic on-device check is ready (no advanced check — the basic check is enough in most cases)";
   els.onDevice.className = nanoReady ? "is-ok" : "is-off";
   els.statusCloud.textContent = status.cloud.configured
-    ? "심층 분석 연결됨 — 꼭 필요할 때만 사용"
-    : "심층 분석 연결 안 됨 — 기본 검사는 정상 동작";
+    ? "Deep analysis connected — used only when truly needed"
+    : "Deep analysis not connected — the basic check works normally";
   els.statusCloud.className = status.cloud.configured ? "is-ok" : "is-off";
   els.appCheck.textContent = `App Check: ${status.appCheck}`;
   if (els.techStatus) {
@@ -80,8 +80,8 @@ function renderStatus(status) {
       `Cloud (Firebase AI Logic): ${status.cloud.configured ? "configured" : "not configured in this build (project values pending) — local tiers fully active"}`;
   }
   els.budget.textContent = status.cloud.configured
-    ? `심층 분석은 꼭 필요할 때만 씁니다 (이번 사용 ${status.cloud.callsUsed}회 · ${status.cloud.callsUsed} / ${status.cloud.budget})`
-    : `심층 분석은 꼭 필요할 때만 씁니다 (이번 사용 ${status.cloud.callsUsed}회 · ${status.cloud.callsUsed} / ${status.cloud.budget}) — 클라우드 미연결로 예산 동결 중`;
+    ? `Deep analysis is used only when truly needed (used ${status.cloud.callsUsed} time(s) this session · ${status.cloud.callsUsed} / ${status.cloud.budget})`
+    : `Deep analysis is used only when truly needed (used ${status.cloud.callsUsed} time(s) this session · ${status.cloud.callsUsed} / ${status.cloud.budget}) — cloud not connected, budget frozen`;
 }
 
 async function refreshStatus() {
@@ -124,17 +124,17 @@ async function nanoConfirmFactory(rawText) {
 }
 
 // --- Rendering ------------------------------------------------------------------
-const WHERE_LABEL = { "on-device": "이 기기에서만 검사함", cloud: "가려진 내용만 클라우드로 보냄", abstained: "이 기기에서 멈춤" };
+const WHERE_LABEL = { "on-device": "Checked on this device only", cloud: "Only the masked skeleton was sent to the cloud", abstained: "Stopped on this device" };
 
 const VERDICT_BADGE = {
-  risk: ["badge badge-risk", "위험"],
-  "no-signals": ["badge badge-clear", "위험 신호 없음"],
-  abstained: ["badge badge-abstain", "판단 보류"],
-  rejected: ["badge badge-abstain", "판단 보류"],
-  "cloud-analysis": ["badge badge-cloud", "심층 분석 완료"],
+  risk: ["badge badge-risk", "RISK"],
+  "no-signals": ["badge badge-clear", "No risk signals"],
+  abstained: ["badge badge-abstain", "Abstained"],
+  rejected: ["badge badge-abstain", "Abstained"],
+  "cloud-analysis": ["badge badge-cloud", "Deep analysis done"],
 };
 
-const VERDICT_KO = { risk: "위험", "no-signals": "위험 신호 없음", abstained: "판단 보류", rejected: "판단 보류", "cloud-analysis": "심층 분석 완료" };
+const VERDICT_LABEL = { risk: "Risk", "no-signals": "No risk signals", abstained: "Abstained", rejected: "Abstained", "cloud-analysis": "Deep analysis done" };
 
 function renderReport(report) {
   els.empty.hidden = true;
@@ -159,10 +159,10 @@ function renderReport(report) {
     report.verdict === VERDICT.RISK ? `Matches known risk patterns (severity: ${report.severity}). Do not pay or sign.`
     : report.verdict === VERDICT.NO_SIGNALS ? "No risk signals found in the local ledger."
     : report.verdict === VERDICT.CLOUD_ANALYSIS ? "Deep analysis completed in the cloud — from the de-identified skeleton only."
-    : report.verdict === VERDICT.ABSTAINED ? "판단할 근거가 부족해 결정을 보류했습니다."
+    : report.verdict === VERDICT.ABSTAINED ? "Not enough evidence to decide — the Shield abstains."
     : "Input rejected.";
   if (els.techCode) {
-    els.techCode.textContent = report.abstainCode ? `기권 코드: ${report.abstainCode}` : "";
+    els.techCode.textContent = report.abstainCode ? `Abstain code: ${report.abstainCode}` : "";
   }
   els.message.textContent = report.message || "";
 
@@ -180,18 +180,18 @@ function renderReport(report) {
       (report.unconfirmedNames ? ` ${report.unconfirmedNames} name candidate(s) unconfirmed — escalation blocked.` : "")
     : "0 items masked.";
 
-  const AXIS_KO = { AUTHORITY: "권위 내세우기", URGENCY: "급하게 몰아붙이기", SECRECY: "비밀 유지 요구", PAYMENT: "송금 유도", LINK: "의심스러운 링크", THREAT: "협박성 문구" };
+  const AXIS_LABEL = { AUTHORITY: "Authority claims", URGENCY: "Pressure and urgency", SECRECY: "Demands for secrecy", PAYMENT: "Payment inducement", LINK: "Suspicious link", THREAT: "Threatening language" };
   els.evidence.innerHTML = "";
   if (report.matched && report.matched.length > 0) {
     for (const m of report.matched) {
       const li = document.createElement("li");
       const axes = [...(m.bones || []), ...(m.clauseRisk || [])];
-      const known = axes.filter((a) => AXIS_KO[a]);
-      const unknown = axes.filter((a) => !AXIS_KO[a]);
-      li.textContent = `${m.label} — 위험 신호: ${known.map((a) => AXIS_KO[a]).join(" · ") || "패턴 일치"}`;
+      const known = axes.filter((a) => AXIS_LABEL[a]);
+      const unknown = axes.filter((a) => !AXIS_LABEL[a]);
+      li.textContent = `${m.label} — risk signals: ${known.map((a) => AXIS_LABEL[a]).join(" · ") || "pattern match"}`;
       const span = document.createElement("span");
       span.className = "evidence-code";
-      span.textContent = `패턴 코드 ${m.id} · 일치 점수 ${m.score}${unknown.length ? ` · ${unknown.join(", ")}` : ""}`;
+      span.textContent = `Pattern ${m.id} · match score ${m.score}${unknown.length ? ` · ${unknown.join(", ")}` : ""}`;
       li.appendChild(span);
       els.evidence.appendChild(li);
     }
@@ -251,14 +251,14 @@ async function renderHistory() {
     const rows = await listAnalyses(10);
     if (rows.length === 0) {
       const li = document.createElement("li");
-      li.textContent = "아직 저장된 검사 기록이 없습니다.";
+      li.textContent = "No check history saved yet.";
       els.history.appendChild(li);
       return;
     }
     for (const row of rows) {
       const li = document.createElement("li");
       const when = new Date(row.ts).toLocaleString();
-      li.textContent = `${when} — ${VERDICT_KO[row.verdict] || row.verdict} · ${WHERE_LABEL[row.route] || row.route} · 개인정보 ${row.isolation.count}건 가림 · ${row.patternIds.length ? `패턴 ${row.patternIds.length}건 일치` : "패턴 일치 없음"}`;
+      li.textContent = `${when} — ${VERDICT_LABEL[row.verdict] || row.verdict} · ${WHERE_LABEL[row.route] || row.route} · ${row.isolation.count} personal item(s) masked · ${row.patternIds.length ? `${row.patternIds.length} pattern(s) matched` : "no pattern matched"}`;
       els.history.appendChild(li);
     }
   } catch {
