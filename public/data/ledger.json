@@ -3181,6 +3181,11 @@
    "kind": "phrase",
    "value": "confirm that you received",
    "weight": 1
+  },
+  {
+   "kind": "structure",
+   "value": "link",
+   "weight": 2
   }
  ],
  "severity": "high",
@@ -3330,6 +3335,31 @@
    "weight": 1
   },
   {
+   "kind": "phrase",
+   "value": "open the link",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "click the link",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "open this link",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "click this link",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "link below",
+   "weight": 1
+  },
+  {
    "kind": "structure",
    "value": "attachment:web",
    "weight": 3
@@ -3353,10 +3383,15 @@
    "kind": "structure",
    "value": "attachment:doc",
    "weight": 1
+  },
+  {
+   "kind": "structure",
+   "value": "link",
+   "weight": 3
   }
  ],
  "severity": "high",
- "guidance": "An attachment offered as proof of an order or payment is a delivery vehicle, not evidence — order documents and payment proofs live inside the platform, not in message attachments. Do not open, download, or run it; check the claim on the platform's orders page instead.",
+ "guidance": "An attachment or a link offered as proof of an order or payment is a delivery vehicle, not evidence — order documents and payment proofs live inside the platform, not in message attachments or external links. Do not open, download, or run it; check the claim on the platform's orders page instead.",
  "verifyChannel": "The marketplace's own orders page, opened by you inside the platform app or site.",
  "negationGuard": true
 }
