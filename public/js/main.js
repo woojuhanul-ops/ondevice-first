@@ -127,11 +127,11 @@ async function nanoConfirmFactory(rawText) {
 const WHERE_LABEL = { "on-device": "이 기기에서만 검사함", cloud: "가려진 내용만 클라우드로 보냄", abstained: "이 기기에서 멈춤" };
 
 const VERDICT_BADGE = {
-  RISK: ["badge badge-risk", "위험"],
-  NO_SIGNALS: ["badge badge-clear", "위험 신호 없음"],
-  ABSTAINED: ["badge badge-abstain", "판단 보류"],
-  REJECTED: ["badge badge-abstain", "판단 보류"],
-  CLOUD_ANALYSIS: ["badge badge-cloud", "심층 분석 완료"],
+  risk: ["badge badge-risk", "위험"],
+  "no-signals": ["badge badge-clear", "위험 신호 없음"],
+  abstained: ["badge badge-abstain", "판단 보류"],
+  rejected: ["badge badge-abstain", "판단 보류"],
+  "cloud-analysis": ["badge badge-cloud", "심층 분석 완료"],
 };
 
 const VERDICT_KO = { risk: "위험", "no-signals": "위험 신호 없음", abstained: "판단 보류", rejected: "판단 보류", "cloud-analysis": "심층 분석 완료" };
