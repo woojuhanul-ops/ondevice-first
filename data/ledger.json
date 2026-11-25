@@ -863,6 +863,26 @@
      "kind": "phrase",
      "value": "expires in 24 hours",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "selected as winners",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "claim prize",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "claim yours",
+     "weight": 2
+    },
+    {
+     "kind": "structure",
+     "value": "link",
+     "weight": 2
     }
    ],
    "severity": "medium",
@@ -979,6 +999,31 @@
      "kind": "phrase",
      "value": "doubling all bitcoin",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "double bitcoin",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "send your bitcoin to",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "double yo bread",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "double up",
+     "weight": 1
+    },
+    {
+     "kind": "structure",
+     "value": "wallet",
+     "weight": 3
     }
    ],
    "severity": "high",
@@ -1731,7 +1776,8 @@
     {
      "kind": "phrase",
      "value": "is on hold pending",
-     "weight": 2
+     "weight": 2,
+     "group": "hold"
     },
     {
      "kind": "phrase",
@@ -1747,6 +1793,47 @@
      "kind": "phrase",
      "value": "before release",
      "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "cannot be delivered",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "could not be completed",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "unable to deliver",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "unpaid postage",
+     "weight": 3
+    },
+    {
+     "kind": "phrase",
+     "value": "incomplete address",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "package has been suspended",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "returned to sender",
+     "weight": 2
+    },
+    {
+     "kind": "phrase",
+     "value": "is on hold",
+     "weight": 2,
+     "group": "hold"
     }
    ],
    "severity": "medium",
@@ -3279,6 +3366,11 @@
    "kind": "phrase",
    "value": "on telegram",
    "weight": 1
+  },
+  {
+   "kind": "structure",
+   "value": "link",
+   "weight": 2
   }
  ],
  "severity": "high",
@@ -3394,6 +3486,151 @@
  "guidance": "An attachment or a link offered as proof of an order or payment is a delivery vehicle, not evidence — order documents and payment proofs live inside the platform, not in message attachments or external links. Do not open, download, or run it; check the claim on the platform's orders page instead.",
  "verifyChannel": "The marketplace's own orders page, opened by you inside the platform app or site.",
  "negationGuard": true
+},
+{
+ "id": "FRAUD-COMMON-ACCTTHREAT-001",
+ "type": "smishing",
+ "locale": "COMMON",
+ "impersonation": {
+  "institutionType": "platform",
+  "label": "Account deletion threat impersonation (platform notice)"
+ },
+ "bones": [
+  "AUTHORITY",
+  "URGENCY"
+ ],
+ "signals": [
+  {
+   "kind": "phrase",
+   "value": "scheduled for deletion",
+   "weight": 3,
+   "group": "sched"
+  },
+  {
+   "kind": "phrase",
+   "value": "scheduled to be deleted",
+   "weight": 3,
+   "group": "sched"
+  },
+  {
+   "kind": "phrase",
+   "value": "will be deleted within",
+   "weight": 3
+  },
+  {
+   "kind": "phrase",
+   "value": "deleted permanently",
+   "weight": 2,
+   "group": "perm"
+  },
+  {
+   "kind": "phrase",
+   "value": "permanently deleted",
+   "weight": 2,
+   "group": "perm"
+  },
+  {
+   "kind": "phrase",
+   "value": "to be deleted from facebook",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "will be removed from facebook",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "verify your account ownership",
+   "weight": 3
+  },
+  {
+   "kind": "phrase",
+   "value": "illegal activity associated with your account",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "appeal this decision",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "file an appeal",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "goes against our community standards",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "verification portal",
+   "weight": 2
+  },
+  {
+   "kind": "structure",
+   "value": "link",
+   "weight": 2
+  }
+ ],
+ "severity": "high",
+ "guidance": "Real platforms do not announce account deletion through posts or messages carrying an external appeal or verification link. Open the platform's own app and check your account status there — never through a link in the message.",
+ "verifyChannel": "The platform's official app, opened by you — account status and appeals live inside it."
+},
+{
+ "id": "FRAUD-COMMON-JOBLURE-001",
+ "type": "smishing",
+ "locale": "COMMON",
+ "impersonation": {
+  "institutionType": "none",
+  "label": "Staged recruitment / task-job lure"
+ },
+ "bones": [
+  "PAYMENT"
+ ],
+ "signals": [
+  {
+   "kind": "phrase",
+   "value": "daily earning",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "daily payment",
+   "weight": 1
+  },
+  {
+   "kind": "phrase",
+   "value": "easy and simple work",
+   "weight": 2
+  },
+  {
+   "kind": "phrase",
+   "value": "work available",
+   "weight": 1
+  },
+  {
+   "kind": "phrase",
+   "value": "contect",
+   "weight": 1
+  },
+  {
+   "kind": "structure",
+   "value": "link",
+   "weight": 2
+  },
+  {
+   "kind": "structure",
+   "value": "phone",
+   "weight": 2
+  }
+ ],
+ "severity": "high",
+ "guidance": "Recruitment that opens with a daily-earnings figure and moves straight to a chat contact is the staged task-scam funnel: small paid tasks first, then a deposit demand. Real employers interview and contract before any earnings talk, and never recruit through comment threads.",
+ "verifyChannel": "The employer's official website and a verifiable business registration, checked independently of the post.",
+ "cap": 5
 }
  ]
 }

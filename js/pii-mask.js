@@ -229,14 +229,56 @@ export function maskText(text) {
   // Non-masked findings: links (signal + skeleton replacement) and
   // context-free long numeric runs (signal only; the rescan gate treats
   // them as escalation blockers, plan §4.1).
+  //
+  // Stage 1 of the public-corpus supplement (2026-11-24): real circulating
+  // scam texts hide their links three ways the plain extractor missed —
+  // defanged schemes/hosts (hxxps://host[.]com), scheme-less short links
+  // (wa.me/…), and crypto wallet addresses, which are not links at all but
+  // the payment destination itself. All three are normalized/extracted
+  // here with the same treatment as links (skeleton replacement + signal);
+  // a wallet is NOT counted as a PII token, so the isolation count and the
+  // rescan gate behave exactly as before. Structure signals never
+  // originate a score on their own — the ledger's corroboration rule
+  // (structure counts only when the pattern's own phrase fired) is
+  // unchanged.
+  const findText = out
+    .replace(/\bhxxps\b/gi, "https")
+    .replace(/\bhxxp\b/gi, "http")
+    .replace(/\[\.\]|\(\.\)|\{\.\}|\[dot\]/gi, ".");
   const links = [];
   const linkRe = /https?:\/\/([^\s/]+)[^\s]*/g;
   let lm;
-  while ((lm = linkRe.exec(out)) !== null) links.push(lm[1]);
-  const maskedText = out.replace(linkRe, "[LINK]");
+  while ((lm = linkRe.exec(findText)) !== null) links.push(lm[1]);
+  let maskedText = findText.replace(linkRe, "[LINK]");
+
+  const SHORT_LINK_DOMAINS = [
+    "wa.me", "t.me", "bit.ly", "tinyurl.com", "rb.gy",
+    "cutt.ly", "is.gd", "tiny.cc", "shorturl.at",
+  ];
+  for (const domain of SHORT_LINK_DOMAINS) {
+    const shortRe = new RegExp(`\\b${domain.replace(/\./g, "\\.")}(/[^\\s]*)?`, "g");
+    maskedText = maskedText.replace(shortRe, () => {
+      links.push(domain);
+      return "[LINK]";
+    });
+  }
+
+  const WALLET_RES = [
+    /\b[13][a-km-zA-HJ-NP-Z1-9]{25,34}\b/g, // BTC legacy (P2PKH / P2SH)
+    /\bbc1[a-z0-9]{39,59}\b/gi, // BTC bech32 (SegWit / Taproot)
+    /\b0x[0-9a-fA-F]{40}(?![0-9a-fA-F])/g, // ETH-style address
+  ];
+  let walletCount = 0;
+  for (const walletRe of WALLET_RES) {
+    maskedText = maskedText.replace(walletRe, () => {
+      walletCount += 1;
+      return "[WALLET]";
+    });
+  }
 
   const signals = [];
   if (links.length > 0) signals.push({ kind: "link", detail: links.join(", ") });
+  if (walletCount > 0) signals.push({ kind: "wallet", detail: `${walletCount} address(es)` });
   const longNumeric = maskedText.match(/(?<![\dA-Za-z])\d{10,}(?![\dA-Za-z])/g);
   if (longNumeric) {
     signals.push({ kind: "long-numeric", detail: `${longNumeric.length} run(s)` });
